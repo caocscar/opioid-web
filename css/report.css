@@ -1,0 +1,65 @@
+/* google map */
+#map {
+  height: 550px;
+  width: 100%;
+}
+
+/* bar line chart */
+.bar {
+   fill:#FFCB05;
+}
+
+.line {
+  fill: none;
+  stroke: #00274C;
+  stroke-width: 4px;
+}
+
+.barline {
+  display: block;
+}
+
+.grid line {
+  stroke: lightgrey;
+  stroke-opacity: 0.7;
+  shape-rendering: crispEdges;
+}
+
+.grid path {
+  stroke-width: 0;
+}
+
+.tick:nth-child(odd) text {
+  visibility: hidden;
+}
+
+/* donut chart */
+tspan {
+  font: 16px sans-serif;
+}
+
+/* html table */
+h1, h2, h3 {
+  text-align: center;
+}
+table {
+  width: 600px;
+  border-collapse: collapse;
+  margin: 0px auto;
+}
+th {
+  background: rgb(0, 39, 76);
+  color: white;
+  font-weight: bold;
+  cursor: s-resize;
+  background-repeat: no-repeat;
+  background-position: 3% center;
+}
+td, th {
+  padding: 6px;
+  border: 1px solid rgb(0, 39, 76);
+  text-align: center;
+}
+#summary tr {
+  background: rgb(255, 203, 5);
+}

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <script src="//d3js.org/d3.v5.min.js"></script>
+  <script src="js/html_table.js"></script>
+  <script src="js/bar_line_chart.js"></script>
+  <script src="js/donut_chart.js"></script>
+  <script src="js/gmap.js"></script>
+  <link rel="stylesheet" href="css/report.css">
+  <!-- <link rel="stylesheet" href="css/bar_line.css">
+  <link rel="stylesheet" href="css/donut.css">
+  <link rel="stylesheet" href="css/gmap.css"> -->
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+</head>
+<body>
+  <div class="container-fluid">
+    <h1>Wayne County Medical Examiner</h1>
+    <!-- <h2>Naloxone Administration Locations</h2> -->
+    <!-- <h2>Patients with Opioid Overdose ICD-10 Codes</h2> -->
+    <h2>Suspected Fatal Opioid Overdoses</h2>
+    <h3 class='daterange'></h3>
+    <!-- <div id='summary'></div> -->
+    <div id="map"></div>
+    <p>More recent overdose incident locations appear darker, and less recent incident locations appear more translucent</p>
+    <!-- <p>More recent overdose resident locations (points perturbed) appear darker, and less recent resident locations appear more translucent</p> -->
+    <div class='barline'></div>
+    <div class='legend'></div>
+    <div class="row">
+      <div class="col-md-4 Age"></div>
+      <div class="col-md-4 Race"></div>
+      <div class="col-md-4 Gender"></div>
+    </div>
+    <footer>
+      <!-- <p>Data Source: MI-EMSIS</p> -->
+      <!-- <p>Data Source: Health Information Exchange Admit Discharge Transfer (ADT) message</p> -->
+      <p>Data Source: Wayne County Medical Examiner</p>
+      <!-- <p>Data Source: Huron Valley Ambulance</p> -->
+    </footer>
+</div>
+  <script src="data/Wayne_ME_address_geocode.js"></script>
+  <script>
+//    make_html_table('data/Wayne_Wayne_weekly_summary.csv','summary');
+    make_bar_line_chart('data/Wayne_ME_daily.csv');
+    make_donut_chart('data/Wayne_ME_age.csv','Age');
+    make_donut_chart('data/Wayne_ME_race.csv','Race');
+    make_donut_chart('data/Wayne_ME_gender.csv','Gender');
+//    make_html_table('data/Wayne_ME_weekly_events.csv','events');
+  </script>
+  <script async defer
+  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBWcrEjQkOP_N22KyU6aPQitc4O-47sWCQ&callback=initMap">
+  </script>
+</body>
+</html>
