@@ -74,8 +74,7 @@ tspan {
   text-anchor: middle;
 }
 
-
-/* html table */
+/* table */
 h1, h2, h3 {
   text-align: center;
 }
@@ -99,4 +98,20 @@ td, th {
 }
 #summary tr {
   background: rgb(255, 203, 5);
+}
+
+/* selenium save to pdf print settings */
+@page {
+    size:  auto;   /* auto is the initial value */
+    margin: 0mm;  /* this affects the margin in the printer settings */
+}
+
+html {
+    /* background-color: #FFFFFF;  */
+    margin: 40px;  /* this affects the margin on the html before sending to printer */
+}
+
+body {
+    /* border: solid 1px red ; */
+    margin: 0mm; /* margin you want for the content */
 }
