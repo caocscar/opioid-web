@@ -5,10 +5,8 @@
 *.hl7
 data/
 pdfs/
-
-wayne_ems/
-wayne_ems_daily/
-wayne_ems.js
+screenshot/
+draft/
 
 # Documentation
 *.pdf

@@ -6,7 +6,8 @@
 
 /* bar line chart */
 .bar {
-   fill:#FFCB05;
+   fill: #FFCB05;
+   stroke: none;
 }
 
 .line {
@@ -33,10 +34,46 @@
   visibility: hidden;
 }
 
+.x.ticklabel {
+  text-anchor: end;
+  font-size: 12px;
+}
+
+.y.ticklabel {
+  font-size: 14px;
+}
+
+.y.label {
+  text-anchor: middle;
+  font-size: 20px;
+}
+
+.legend {
+  text-anchor: start;
+  font-size: 20px;
+}
+
 /* donut chart */
 tspan {
   font: 16px sans-serif;
+  text-anchor: middle;
 }
+
+.arclabel.one {
+  font-weight: 600;
+}
+
+.donut_center {
+  font-size: 3em;
+  text-anchor: middle;
+}
+
+.donut_title {
+  font-size: 2em;
+  font-weight: 500;
+  text-anchor: middle;
+}
+
 
 /* html table */
 h1, h2, h3 {

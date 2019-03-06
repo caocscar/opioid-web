@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <script src="https://d3js.org/d3.v5.min.js"></script>
+  <link rel="stylesheet" href="/static/css/report.css">
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</head>
+<body>
+  <div class="container-fluid">
+    <!-- Heading -->
+    <h1>{{ data.county }} County {{ data.titlename }}</h1>
+    {% if data.src == 'EMS' %}
+      <h2>Naloxone Administration Locations</h2>
+    {% elif data.src == 'ED' %}
+      <h2>Patients with Opioid Overdose ICD-10 Codes</h2>
+    {% elif data.src == 'ME' %}
+      <h2>Suspected Fatal Opioid Overdoses</h2>
+    {% endif %}
+    <h3 class='daterange'></h3>
+
+    <!-- Google Map -->
+    <div id="map"></div>
+    {% if data.src in ['EMS','ME'] %}
+      <p>More recent overdose incident locations appear darker, and less recent incident locations appear more translucent</p>
+    {% elif data.src == 'ED' %}
+      <p>More recent overdose resident locations (points perturbed) appear darker, and less recent resident locations appear more translucent</p>
+    {% endif %}
+    
+    <!-- D3 Donuts -->
+    <div class='barline'></div>
+    <div class="row">
+      <div class="col-md-4 Age"></div>
+      <div class="col-md-4 Race"></div>
+      <div class="col-md-4 Gender"></div>
+    </div>
+    
+    <!-- Footer -->
+    <footer>
+    {% if data.src == 'EMS' and data.county == 'Washtenaw' %}
+      <p>Data Source: Huron Valley Ambulance</p>
+    {% elif data.src == 'EMS' %}
+      <p>Data Source: MI-EMSIS</p>
+    {% elif data.src == 'ED' %}
+      <p>Data Source: Health Information Exchange Admit Discharge Transfer (ADT) message</p>
+    {% elif data.src == 'ME' %}
+      <p>Data Source: {{ data.county }} County Medical Examiner</p>
+    {% endif %}
+    </footer>
+  </div>
+
+  <script>
+    var center = {{ data.center }}
+    var county_geojson = "{{ url_for('static',filename=data.f_geojson) }}"
+  </script>
+  <script src="{{ url_for('static',filename=data.f_gps) }}"></script>
+  <script src="/static/js/gmap.js"></script>
+  <script src="/static/js/bar_line_chart.js"></script>
+  <script src="/static/js/donut_chart.js"></script>
+  <script>
+    make_bar_line_chart("{{ url_for('static',filename=data.f_daily) }}");
+    make_donut_chart("{{ url_for('static',filename=data.f_age) }}",'Age');
+    make_donut_chart("{{ url_for('static',filename=data.f_race) }}",'Race');
+    make_donut_chart("{{ url_for('static',filename=data.f_gender) }}",'Gender');
+  </script>
+  <script async defer
+  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBWcrEjQkOP_N22KyU6aPQitc4O-47sWCQ&callback=initMap">
+  </script>
+</body>
+</html>
