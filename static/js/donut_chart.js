@@ -6,7 +6,7 @@ async function make_donut_chart(filename, column) {
       height = 400 - margin.top - margin.bottom + 50,
       radius = Math.min(width, height) / 2;
   
-  n = column == 'Age' ? 0 : column == 'Gender' ? 6 : 8
+  n = column == 'Age' ? 0 : column == 'Gender' ? 6 : 0
   var color = d3.schemePaired.slice(n);
 
   var pie = d3.pie()
