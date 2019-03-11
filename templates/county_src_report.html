@@ -59,15 +59,15 @@
     var center = {{ data.center }}
     var county_geojson = "{{ url_for('static',filename=data.f_geojson) }}"
   </script>
-  <script src="{{ url_for('static',filename=data.f_gps) }}"></script>
+  <script src="{{ url_for('static',filename='data/county_src_gps.js') }}"></script>
   <script src="/static/js/gmap.js"></script>
   <script src="/static/js/bar_line_chart.js"></script>
   <script src="/static/js/donut_chart.js"></script>
   <script>
-    make_bar_line_chart("{{ url_for('static',filename=data.f_daily) }}");
-    make_donut_chart("{{ url_for('static',filename=data.f_age) }}",'Age');
-    make_donut_chart("{{ url_for('static',filename=data.f_race) }}",'Race');
-    make_donut_chart("{{ url_for('static',filename=data.f_gender) }}",'Gender');
+    make_bar_line_chart("{{ url_for('static',filename='data/county_src_daily.csv') }}");
+    make_donut_chart("{{ url_for('static',filename='data/county_src_age.csv') }}",'Age');
+    make_donut_chart("{{ url_for('static',filename='data/county_src_race.csv') }}",'Race');
+    make_donut_chart("{{ url_for('static',filename='data/county_src_gender.csv') }}",'Gender');
   </script>
   <script async defer
   src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBWcrEjQkOP_N22KyU6aPQitc4O-47sWCQ&callback=initMap">
