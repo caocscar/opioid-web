@@ -4,7 +4,7 @@ async function make_bar_line_chart(filename) {
   const data = origdata.map(({date:x, value:bar, avg:line}) => ({x, bar, line}) );
 
   // set the dimensions and margins of the graph
-  var margin = {top: 0, right: 40, bottom: 30+40+40, left: 50+20},
+  var margin = {top: 0, right: 40+40, bottom: 30+40+40, left: 50+20},
       width = 1200 - margin.left - margin.right,
       height = 500 - margin.top - margin.bottom + 40;
 
