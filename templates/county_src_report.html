@@ -15,15 +15,21 @@
 <body>
   <div class="container-fluid">
     <!-- Heading -->
-    <h1>{{ data.county }} County {{ data.titlename }}</h1>
-    {% if data.src == 'EMS' %}
-      <h2>Naloxone Administration Locations</h2>
-    {% elif data.src == 'ED' %}
-      <h2>Patients with Opioid Overdose ICD-10 Codes</h2>
-    {% elif data.src == 'ME' %}
-      <h2>Suspected Fatal Opioid Overdoses</h2>
-    {% endif %}
-    <h3 class='daterange'></h3>
+    <div id="sos-title" class="row" style="background: url({{ url_for('static',filename='img/SOS.png') }}) top right no-repeat; background-size: 105px 80px;">
+      <div class="col-md-12">
+        <h1>{{ data.county }} County {{ data.titlename }}</h1>
+        <h3>
+        {% if data.src == 'EMS' %}
+          Naloxone Administration Locations
+        {% elif data.src == 'ED' %}
+          Patients with Opioid Overdose ICD-10 Codes
+        {% elif data.src == 'ME' %}
+          Suspected Fatal Opioid Overdoses
+        {% endif %}
+        </h3>
+        <h3 class='daterange'></h3>
+      </div>
+    </div>
 
     <!-- Google Map -->
     <div id="map"></div>
@@ -43,15 +49,22 @@
     
     <!-- Footer -->
     <footer>
-    {% if data.src == 'EMS' and data.county == 'Washtenaw' %}
-      <p>Data Source: Huron Valley Ambulance</p>
-    {% elif data.src == 'EMS' %}
-      <p>Data Source: MI-EMSIS</p>
-    {% elif data.src == 'ED' %}
-      <p>Data Source: Health Information Exchange Admit Discharge Transfer (ADT) message</p>
-    {% elif data.src == 'ME' %}
-      <p>Data Source: {{ data.county }} County Medical Examiner</p>
-    {% endif %}
+      <div class="row" style="background: url({{ url_for('static',filename='img/HIDTA.png') }}) top right no-repeat; background-size: 75px 80px; height: 82px;">
+        <div class="col-md-12">
+          <p style="margin-bottom: 8px;">
+            {% if data.src == 'EMS' and data.county == 'Washtenaw' %}
+              Data Source: Huron Valley Ambulance
+            {% elif data.src == 'EMS' %}
+              Data Source: MI-EMSIS
+            {% elif data.src == 'ED' %}
+              Data Source: Health Information Exchange Admit Discharge Transfer (ADT) message
+            {% elif data.src == 'ME' %}
+              Data Source: {{ data.county }} County Medical Examiner
+            {% endif %}
+          </p>
+          <img height="25" src="{{ url_for('static',filename='img/IPC.png') }}" alternate="Injury Prevention Center Logo">
+        </div>
+      </div>
     </footer>
   </div>
 

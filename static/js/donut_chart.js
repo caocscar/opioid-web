@@ -3,7 +3,7 @@ async function make_donut_chart(filename, column) {
 
   var margin = {top: 10, right: 10, bottom: 10, left: 20},
       width = 400 - margin.left - margin.right,
-      height = 400 - margin.top - margin.bottom + 50,
+      height = 400 - margin.top - margin.bottom + 0,
       radius = Math.min(width, height) / 2;
   
   n = column == 'Age' ? 0 : column == 'Gender' ? 6 : 0
@@ -14,8 +14,8 @@ async function make_donut_chart(filename, column) {
       .sort(null);
 
   var arc = d3.arc()
-      .outerRadius(radius * 0.9)
-      .innerRadius(radius * 0.4)
+      .outerRadius(radius * 0.8)
+      .innerRadius(radius * 0.3)
 
   var svg = d3.select("." + column).append("svg")
       .attr("width", width)

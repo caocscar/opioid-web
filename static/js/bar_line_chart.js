@@ -6,7 +6,7 @@ async function make_bar_line_chart(filename) {
   // set the dimensions and margins of the graph
   var margin = {top: 0, right: 40+40, bottom: 30+40+40, left: 50+20},
       width = 1200 - margin.left - margin.right,
-      height = 500 - margin.top - margin.bottom + 40;
+      height = 480 - margin.top - margin.bottom + 40;
 
   // append the svg object to the body of the page
   // appends a 'group' element to 'svg'

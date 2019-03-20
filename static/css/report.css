@@ -2,6 +2,7 @@
 #map {
   height: 550px;
   width: 100%;
+  margin-top: 1em;
 }
 
 /* bar line chart */
@@ -64,14 +65,18 @@ tspan {
 }
 
 .donut_center {
-  font-size: 3em;
+  font-size: 2em;
   text-anchor: middle;
 }
 
 .donut_title {
-  font-size: 2em;
+  font-size: 1.5em;
   font-weight: 500;
   text-anchor: middle;
+}
+
+#logos {
+  
 }
 
 /* table */

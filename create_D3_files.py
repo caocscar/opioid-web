@@ -28,8 +28,8 @@ list_df = []
 for file in files:
     tmp = pd.read_csv(os.path.join(wdir,file))
     tmp['date'] = pd.to_datetime(tmp['date'])
-    src = file.split('_')[1]
-    tmp['src'] = src.strip('.csv')
+    dataset = file.split('_')[1]
+    tmp['src'] = dataset.strip('.csv')
     list_df.append(tmp)
 df = pd.concat(list_df,ignore_index=True)
 # age groups
@@ -49,9 +49,9 @@ def get_firstday(T0, daily, latest_date):
 
 def create_county_files(county, src, T0, T1=None):
     cty = df[(df['county'] == county) & (df['src'] == src)]
+    latest_date = df.loc[df['src'] == src,'date'].max()
     # daily
     earliest_date = cty['date'].min().strftime('%Y-%m-%d')
-    latest_date = cty['date'].max()
     daterange = pd.date_range(earliest_date, latest_date, freq='D')
     ts = cty.set_index('date')
     daily = ts['county'].resample('D').count()
@@ -113,6 +113,6 @@ def create_gps_file(cty_date, T0, latest_date):
         
 #%%
 if __name__ == '__main__':
-    create_county_files('Wayne','EMS', 20190226, 20190227)
+    create_county_files('Washtenaw','ME', 14)
 
 
