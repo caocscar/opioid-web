@@ -40,31 +40,39 @@ df['race'].replace(race_dict, inplace=True)
 df['gender'].replace(gender_dict, inplace=True)
 
 #%%
-def get_firstday(T0, daily, latest_date):
+def get_firstday(T0, latest_date):
     if T0 >= 20000000:
         T0 = str(T0)
         return f'{T0[:4]}-{T0[4:6]}-{T0[6:]}'
     else:
         return (latest_date + pd.DateOffset(days=-T0+1)).strftime('%Y-%m-%d')
+    
+def get_lastday(T1, latest_date):
+    if T1:
+        T1 = str(T1)
+        return f'{T1[:4]}-{T1[4:6]}-{T1[6:]}'
+    else:
+        return latest_date.strftime('%Y-%m-%d')
 
 def create_county_files(county, src, T0, T1=None):
-    cty = df[(df['county'] == county) & (df['src'] == src)]
+    cty = df[(df['county'] == county) & (df['src'] == src)]      
+    # daily file
     latest_date = df.loc[df['src'] == src,'date'].max()
-    # daily
-    earliest_date = cty['date'].min().strftime('%Y-%m-%d')
+    T_start = get_firstday(T0, latest_date)
+    T_end = get_lastday(T1, latest_date)
+    if cty.empty:
+        cty_date = cty
+        daily = pd.Series()
+        earliest_date = pd.to_datetime(T_start)
+    else:
+        ts = cty.set_index('date')
+        daily = ts['county'].resample('D').count()
+        earliest_date = cty['date'].min().strftime('%Y-%m-%d')  
     daterange = pd.date_range(earliest_date, latest_date, freq='D')
-    ts = cty.set_index('date')
-    daily = ts['county'].resample('D').count()
     daily = daily.reindex(daterange, fill_value=0)
     daily = daily.to_frame().reset_index()
     daily.columns = ['date','value']
     daily['avg'] = daily['value'].rolling(7, min_periods=1).mean().round(2)
-    T_start = get_firstday(T0, daily, latest_date)
-    if T1:
-        T1 = str(T1)
-        T_end = f'{T1[:4]}-{T1[4:6]}-{T1[6:]}'
-    else:
-        T_end = latest_date.strftime('%Y-%m-%d')
     create_daily_file(T_start, T_end, daily)
     # date filtering
     cty_date = cty[cty['date'].between(T_start,T_end)]
@@ -113,6 +121,6 @@ def create_gps_file(cty_date, T0, latest_date):
         
 #%%
 if __name__ == '__main__':
-    create_county_files('Washtenaw','ME', 14)
+    create_county_files('Macomb','ED', 20190101)
 
 

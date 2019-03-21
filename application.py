@@ -12,13 +12,13 @@ application.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
 @application.route('/<string:county>/<string:src>/<int:T0>/<int:T1>', methods=['GET'])
 def one_page_report(county, src, T0, T1):
     create_county_files(county, src, T0, T1)
-    county = county.capitalize()
+    county = county.title()
     src = src.upper()
     data = {
         'county': county,
         'src': src,
         'titlename': src_dict[src],
-        'f_geojson': f'data/geojson/{county}.geojson',
+        'f_geojson': f'geojson/counties/{county}.geojson',
         'center': center_dict[county],
     }
     return render_template("county_src_report.html", data=data)
