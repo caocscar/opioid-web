@@ -16,10 +16,10 @@ def one_page_report(county, src, T0, T1):
     src = src.upper()
     create_county_files(county, src, T0, T1)
     if county in cities and county != 'Kalamazoo':
-        folder = 'city'
+        folder = 'cities'
         county_flag = ''
     else:
-        folder = 'county'
+        folder = 'counties'
         county_flag = 'County'
     data = {
         'county': county,

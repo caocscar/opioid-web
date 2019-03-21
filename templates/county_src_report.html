@@ -17,7 +17,7 @@
     <!-- Heading -->
     <div id="sos-title" class="row" style="background: url({{ url_for('static',filename='img/SOS.png') }}) top right no-repeat; background-size: 105px 80px;">
       <div class="col-md-12">
-        <h1>{{ data.county }} County {{ data.titlename }}</h1>
+        <h1>{{ data.county }} {{ data.county_flag }} {{ data.titlename }}</h1>
         <h3>
         {% if data.src == 'EMS' %}
           Naloxone Administration Locations
@@ -59,7 +59,7 @@
             {% elif data.src == 'ED' %}
               Data Source: Health Information Exchange Admit Discharge Transfer (ADT) message
             {% elif data.src == 'ME' %}
-              Data Source: {{ data.county }} County Medical Examiner
+              Data Source: {{ data.county }} {{ data.county_flag }} Medical Examiner
             {% endif %}
           </p>
           <img height="25" src="{{ url_for('static',filename='img/IPC.png') }}" alternate="Injury Prevention Center Logo">
