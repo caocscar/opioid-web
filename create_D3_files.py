@@ -6,7 +6,7 @@ Created on Thu Mar  7 14:36:25 2019
 """
 import pandas as pd
 import os
-from opioid_dict import race_dict, gender_dict
+from opioid_dict import race_dict, gender_dict, cities
 from datetime import datetime
 
 pd.options.display.max_rows = 30
@@ -55,7 +55,8 @@ def get_lastday(T1, latest_date):
         return latest_date.strftime('%Y-%m-%d')
 
 def create_county_files(county, src, T0, T1=None):
-    cty = df[(df['county'] == county) & (df['src'] == src)]      
+    column = 'city' if (county in cities and county != 'Kalamazoo') else 'county'   
+    cty = df[(df[column] == county) & (df['src'] == src)]      
     # daily file
     latest_date = df.loc[df['src'] == src,'date'].max()
     T_start = get_firstday(T0, latest_date)
@@ -67,7 +68,7 @@ def create_county_files(county, src, T0, T1=None):
     else:
         earliest_date = cty['date'].min().strftime('%Y-%m-%d')  
         ts = cty.set_index('date')
-        daily = ts['county'].resample('D').count()
+        daily = ts[column].resample('D').count()
     daterange = pd.date_range(earliest_date, latest_date, freq='D')
     daily = daily.reindex(daterange, fill_value=0)
     daily = daily.to_frame().reset_index()
