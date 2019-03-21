@@ -61,13 +61,13 @@ def create_county_files(county, src, T0, T1=None):
     T_start = get_firstday(T0, latest_date)
     T_end = get_lastday(T1, latest_date)
     if cty.empty:
+        earliest_date = pd.to_datetime(T_start)
         cty_date = cty
         daily = pd.Series()
-        earliest_date = pd.to_datetime(T_start)
     else:
+        earliest_date = cty['date'].min().strftime('%Y-%m-%d')  
         ts = cty.set_index('date')
         daily = ts['county'].resample('D').count()
-        earliest_date = cty['date'].min().strftime('%Y-%m-%d')  
     daterange = pd.date_range(earliest_date, latest_date, freq='D')
     daily = daily.reindex(daterange, fill_value=0)
     daily = daily.to_frame().reset_index()

@@ -11,9 +11,9 @@ application.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
 @application.route('/<string:county>/<string:src>/<int:T0>', defaults={'T1':None}, methods=['GET'])
 @application.route('/<string:county>/<string:src>/<int:T0>/<int:T1>', methods=['GET'])
 def one_page_report(county, src, T0, T1):
-    create_county_files(county, src, T0, T1)
     county = county.title()
     src = src.upper()
+    create_county_files(county, src, T0, T1)
     data = {
         'county': county,
         'src': src,
