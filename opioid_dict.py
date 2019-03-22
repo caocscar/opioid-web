@@ -134,4 +134,4 @@ center_dict = {'Detroit': '{lat: 42.35, lng: -83.09}',
     'Wayne': '{lat:42.26, lng:-83.31}',
     'Wexford': '{lat:44.34, lng:-85.58}',
 }
-cities = ['Bay City','Detroit','Flint','Grand Rapids','Kalamazoo','Pontiac','Saginaw']
+cities = ['Bay City','Detroit','Flint','Grand Rapids','Pontiac']
