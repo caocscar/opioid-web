@@ -81,7 +81,7 @@ def create_county_files(county, src, T0, T1=None):
     create_age_file(cty_date)
     create_race_file(cty_date)
     create_gender_file(cty_date)
-    create_gps_file(cty_date, T0, latest_date)
+    create_gps_file(cty_date, T0, T_end)
 
 def create_daily_file(T_start, T_end, daily):
     daily_subset = daily[daily['date'].between(T_start,T_end)]        
@@ -105,23 +105,24 @@ def create_gender_file(cty_date):
     gender = gender.reset_index()
     gender.to_csv(os.path.join(savedir,f'county_src_gender.csv'), index=False, header=headers)        
 
-def create_gps_file(cty_date, T0, latest_date):
+def create_gps_file(cty_date, T0, T_end):
     if T0 <= 7:
         cty_date['opacity'] = 1   
     else:
-        delta = latest_date - cty_date['date']
+        enddate = pd.to_datetime(T_end)
         if T0 >= 20000000:
             first_date = datetime.strptime(str(T0),'%Y%m%d')
-            numdays = (latest_date - first_date).days
+            numdays = (enddate - first_date).days
         else:
             numdays = T0
-        cty_date['opacity'] = 1 - delta.dt.days / numdays
+        delta = enddate - cty_date['date']
+        cty_date['opacity'] = 1 - delta.dt.days / (numdays + 1)
     with open(os.path.join(savedir,'county_src_gps.js'),'w') as fout:
         fout.write('var event_pts = ')
         cty_date[['lat','lng','opacity']].to_json(fout, orient='records')
         
 #%%
 if __name__ == '__main__':
-    create_county_files('Macomb','ED', 20190101)
+    create_county_files('Wayne','EMS', 20190224, 20190308)
 
 
