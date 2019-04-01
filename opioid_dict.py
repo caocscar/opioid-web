@@ -135,3 +135,4 @@ center_dict = {'Detroit': '{lat: 42.35, lng: -83.09}',
     'Wexford': '{lat:44.34, lng:-85.58}',
 }
 cities = ['Bay City','Detroit','Flint','Grand Rapids','Pontiac']
+counties = [county for county in center_dict.keys() if county not in cities]

@@ -1,9 +1,19 @@
 from flask import Flask, render_template
-from opioid_dict import src_dict, center_dict, cities
+from opioid_dict import src_dict, center_dict, cities, counties
 from create_D3_files import create_county_files
+import pandas as pd
+import os
 
 application = Flask(__name__)
 application.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
+
+@application.route('/')
+def homepage():
+    data = {
+      'src': ['EMS','ED','ME'],
+      'counties': counties,
+    }
+    return render_template("index.html", data=data)
 
 @application.route('/<string:county>/<string:src>/', defaults={'T0':7, 'T1':None}, methods=['GET'])
 @application.route('/<string:county>/<string:src>/<int:T0>', defaults={'T1':None}, methods=['GET'])
