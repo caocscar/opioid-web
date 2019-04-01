@@ -106,7 +106,7 @@ def create_gender_file(cty_date):
     gender.to_csv(os.path.join(savedir,f'county_src_gender.csv'), index=False, header=headers)        
 
 def create_gps_file(cty_date, T0, T_end):
-    if T0 <= 7:
+    if T0 <= 14:
         cty_date['opacity'] = 1   
     else:
         enddate = pd.to_datetime(T_end)
