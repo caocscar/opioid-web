@@ -8,6 +8,7 @@ pdfs/
 screenshot/
 draft/
 chromedriver.exe
+selenium_screenshot_county_reports.py
 
 # Documentation
 *.pdf

@@ -8,7 +8,6 @@ application.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
 @application.route('/')
 def homepage():
     data = {
-      'src': ['EMS','ED','ME'],
       'counties': counties,
     }
     return render_template("index.html", data=data)
