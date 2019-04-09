@@ -15,6 +15,7 @@
       {% for src in ['EMS','ED','ME'] %}
         <div class="col-md-4" id="{{ src }}">
           <h3 class="col">{{ src }}</h3>
+		      <div class="{{ 'map'+src }}"></div>
           <div class='row'>
             <div class='col-md-6'>
               {% for county in data.counties[:42] %}
@@ -22,9 +23,9 @@
               {% endfor %}
             </div>
             <div class='col-md-6'>
-                {% for county in data.counties[42:] %}
-                    <p><a href='{{ county }}/{{ src }}'>{{ county }}</a></p>
-                {% endfor %}
+              {% for county in data.counties[42:] %}
+                  <p><a href='{{ county }}/{{ src }}'>{{ county }}</a></p>
+              {% endfor %}
             </div>
           </div>
         </div>
@@ -32,3 +33,11 @@
     </div>
   </div>
 </body>
+<script src="https://d3js.org/d3.v5.min.js"></script>
+<script src="//d3js.org/topojson.v3.min.js"></script>
+<script src="static/js/michigan.js"></script>
+<script>
+  make_map(EMS, "EMS");
+  make_map(ED, "ED");
+  make_map(ME, "ME");
+</script>

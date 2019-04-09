@@ -20,5 +20,40 @@ h1, .p {
 }
 
 #ED {
-  background: #fee;
+  background: #e4e1df; /* OBSERVATORY WHITE */
+}
+
+/* Map Related */
+path.county {
+  stroke: #fff;
+}
+
+path.county:hover {
+  fill: #ffcb05; /* MAIZE */
+}
+
+.EMS.county {
+  fill: #587abc; /* CANHAM POOL BLUE */
+}
+
+.ED.county {
+  fill: #575294; /* MATTHAEI VIOLET */
+}
+
+.ME.county {
+  fill: #00274c; /* BLUE */
+}
+
+.mapEMS, .mapED, .mapME {
+  margin-bottom : 20px;
+}
+
+.tooltip.show {
+  max-width:310px;
+  padding:3px 8px;
+  text-align:center;
+  opacity: 0.2;
+  -webkit-border-radius:5px;
+  -moz-border-radius:5px;
+  border-radius:5px
 }

@@ -7,8 +7,11 @@ data/
 pdfs/
 screenshot/
 draft/
+
+# web scraping stuff
 chromedriver.exe
-selenium_screenshot_county_reports.py
+*fake*
+*screenshot*.py
 
 # Documentation
 *.pdf
