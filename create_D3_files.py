@@ -20,8 +20,6 @@ racelist = ['White','Black','Hispanic or Latino','Asian','American Indian or Ala
 genderlist = ['Female','Male','Unknown']
 
 headers = ['index','value']
-bins = [0,25,35,45,55,999]
-labels = ['<25','25-34','35-44','45-54','55+']
 
 files = ['web_ED.csv','web_EMS.csv','web_EMS_Washtenaw.csv','web_ME.csv','web_ME_Wayne.csv']
 list_df = []
@@ -32,12 +30,6 @@ for file in files:
     tmp['src'] = dataset.strip('.csv')
     list_df.append(tmp)
 df = pd.concat(list_df,ignore_index=True)
-# age groups
-df['age_grp'] = pd.cut(df['age'], bins=bins, labels=labels)
-# race labels
-df['race'].replace(race_dict, inplace=True)
-# gender labels
-df['gender'].replace(gender_dict, inplace=True)
 
 #%%
 def get_firstday(T0, latest_date):
@@ -103,7 +95,7 @@ def create_gender_file(cty_date):
     gender = cty_date['gender'].value_counts()
     gender = gender.reindex(genderlist, fill_value=0)
     gender = gender.reset_index()
-    gender.to_csv(os.path.join(savedir,f'county_src_gender.csv'), index=False, header=headers)        
+    gender.to_csv(os.path.join(savedir,'county_src_gender.csv'), index=False, header=headers)        
 
 def create_gps_file(cty_date, T0, T_end):
     if T0 <= 14:
