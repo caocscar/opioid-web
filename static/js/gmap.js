@@ -1,11 +1,11 @@
   function initMap() {
 
     var map = new google.maps.Map(document.getElementById('map'), {
-      zoom: 10,
+      zoom: zoom,
       center: center,
     });
     // Need to run a simple http server to get loadGeoJson working (python -m http.server 5000)
-    map.data.loadGeoJson(county_geojson);
+    map.data.loadGeoJson(geojson_file);
     map.data.setStyle({
       fillColor: 'black',
       fillOpacity: 0.1,

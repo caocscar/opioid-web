@@ -27,6 +27,7 @@ async function make_map(svgname, src) {
       .attr("data-placement", "top")
 
   const MItopo = await d3.json('static/geojson/gz_2010_us_050_00_5m_MI_counties.topojson')
+  const cities = await d3.csv('static/geojson/cities.csv')
   // convert to geojson
   const MIgeo = topojson.feature(MItopo, MItopo.objects.collection)
 
@@ -47,11 +48,29 @@ async function make_map(svgname, src) {
       .attr("id", "tooltips")
       .attr("data-toggle", "tooltip")
       .attr("title", d => d.properties.name)
-      .on("click", d => { 
-        window.location.href += d.properties.name + "/" + src
-      })
-      $(function () {
+      .on("click", d => window.location.href += d.properties.name + "/" + src)
+      $(function() {
         $('[data-toggle="tooltip"]').tooltip()
       })
-};
 
+    svgname.selectAll('circle')
+      .data(cities)
+      .enter().append('circle')
+        .attr('class', 'city')
+        .attr('r', '3')
+        .attr("data-toggle", "tooltip")
+        .attr('cx', d => projection([d.lng,d.lat])[0])
+        .attr('cy', d => projection([d.lng,d.lat])[1])
+        .attr("title", d => d.name)
+        .on("click", d => window.location.href += d.name + "/" + src)
+        $(function() {
+          $('[data-toggle="tooltip"]').tooltip()
+        })
+
+  };
+
+  function type(d) {
+    d.lat = +d.lat;
+    d.lng = +d.lng;
+    return d
+};

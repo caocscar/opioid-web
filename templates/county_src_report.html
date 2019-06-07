@@ -71,8 +71,9 @@
   </div>
 
   <script>
+    var zoom = {{ data.zoom }}
     var center = {{ data.center }}
-    var county_geojson = "{{ url_for('static',filename=data.f_geojson) }}"
+    var geojson_file = "{{ url_for('static',filename=data.f_geojson) }}"
   </script>
   <script src="{{ url_for('static',filename='data/county_src_gps.js') }}"></script>
   <script src="/static/js/gmap.js"></script>

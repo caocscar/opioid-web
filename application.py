@@ -31,7 +31,8 @@ def one_page_report(county, src, T0, T1):
         'county_flag': county_flag,
         'titlename': src_dict[src],
         'f_geojson': f'geojson/{folder}/{county}.geojson',
-        'center': center_dict[county],
+        'center': center_dict[county]['center'],
+        'zoom': center_dict[county].get('zoom',10),
     }
     return render_template("county_src_report.html", data=data)
 

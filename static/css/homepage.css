@@ -23,14 +23,6 @@ h1, .p {
   background: #e4e1df; /* OBSERVATORY WHITE */
 }
 
-/* Map Related */
-path.county {
-  stroke: #fff;
-}
-
-path.county:hover {
-  fill: #ffcb05; /* MAIZE */
-}
 
 .EMS.county {
   fill: #587abc; /* CANHAM POOL BLUE */
@@ -48,12 +40,37 @@ path.county:hover {
   margin-bottom : 20px;
 }
 
-.tooltip.show {
-  max-width:310px;
-  padding:3px 8px;
-  text-align:center;
-  opacity: 0.2;
-  -webkit-border-radius:5px;
-  -moz-border-radius:5px;
-  border-radius:5px
+/*Style for Custom Tooltip */
+.tooltip {
+  position: absolute !important;
+  text-align: center !important;
+  min-width: 80px !important;
+  height: auto !important;
+  padding: 10px !important;
+  font-size: 14px !important;
+  font-family: arial !important;
+  background: rgba(0,0,0, 0.9) !important;
+  color: #fff !important;
+  border-radius: 5px !important;
+  pointer-events: none !important;
+  line-height: 1 !important;
+}
+
+.tooltip p {
+  margin: 2px !important;
+}
+
+path.county {
+  fill: #00274c !important;
+  stroke: #fff !important;
+}
+
+path.county:hover, circle.city:hover {
+  fill: #ffcb05 !important;
+  cursor: pointer !important;
+}
+
+circle.city {
+  fill: #587abc !important;
+  stroke: white !important;
 }

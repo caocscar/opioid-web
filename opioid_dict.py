@@ -45,94 +45,461 @@ gender_dict = {'F':'Female',
                'Unknown (Unable to Determine)':'Unknown',
                'Not Applicable':'Unknown',
                }
-center_dict = {'Detroit': '{lat: 42.35, lng: -83.09}',
-    'Bay City': '{lat: 43.58, lng: -83.88}',
-    'Flint': '{lat:43.013, lng:-83.69}',
-    'Grand Rapids': '{lat:42.95, lng:-85.69}',
-    'Pontiac': '{lat:42.65, lng:-83.3}',
-    'Alcona': '{lat:44.68, lng:-83.58}',
-    'Alger': '{lat:46.43, lng:-86.61}',
-    'Allegan': '{lat:42.59, lng:-85.91}',
-    'Alpena': '{lat:45.03, lng:-83.68}',
-    'Antrim': '{lat:45.03, lng:-85.14}',
-    'Arenac': '{lat:44.09, lng:-83.87}',
-    'Baraga': '{lat:46.67, lng:-88.35}',
-    'Barry': '{lat:42.59, lng:-85.31}',
-    'Bay': '{lat:43.64, lng:-84.03}',
-    'Benzie': '{lat:44.65, lng:-86.04}',
-    'Berrien': '{lat:41.85, lng:-86.42}',
-    'Branch': '{lat:41.93, lng:-85.05}',
-    'Calhoun': '{lat:42.26, lng:-85.0}',
-    'Cass': '{lat:41.93, lng:-85.99}',
-    'Charlevoix': '{lat:45.22, lng:-85.06}',
-    'Cheboygan': '{lat:45.44, lng:-84.48}',
-    'Chippewa': '{lat:46.29, lng:-84.57}',
-    'Clare': '{lat:44.0, lng:-84.85}',
-    'Clinton': '{lat:42.99, lng:-84.6}',
-    'Crawford': '{lat:44.65, lng:-84.61}',
-    'Delta': '{lat:45.99, lng:-86.9}',
-    'Dickinson': '{lat:45.98, lng:-87.87}',
-    'Eaton': '{lat:42.59, lng:-84.84}',
-    'Emmet': '{lat:45.53, lng:-84.92}',
-    'Genesee': '{lat:43.00, lng:-83.69}',
-    'Gladwin': '{lat:44.0, lng:-84.39}',
-    'Gogebic': '{lat:46.38, lng:-89.7}',
-    'Grand Traverse': '{lat:44.62, lng:-85.58}',
-    'Gratiot': '{lat:43.29, lng:-84.61}',
-    'Hillsdale': '{lat:41.93, lng:-84.59}',
-    'Houghton': '{lat:47.05, lng:-88.61}',
-    'Huron': '{lat:43.82, lng:-83.04}',
-    'Ingham': '{lat:42.59, lng:-84.37}',
-    'Ionia': '{lat:42.99, lng:-85.07}',
-    'Iosco': '{lat:44.34, lng:-83.6}',
-    'Iron': '{lat:46.19, lng:-88.55}',
-    'Isabella': '{lat:43.64, lng:-84.85}',
-    'Jackson': '{lat:42.26, lng:-84.42}',
-    'Kalamazoo': '{lat:42.26, lng:-85.53}',
-    'Kalkaska': '{lat:44.68, lng:-85.09}',
-    'Kent': '{lat:43.03, lng:-85.53}',
-    'Keweenaw': '{lat:47.31, lng:-88.17}',
-    'Lake': '{lat:44.0, lng:-85.8}',
-    'Lapeer': '{lat:43.1, lng:-83.22}',
-    'Leelanau': '{lat:44.85, lng:-85.85}',
-    'Lenawee': '{lat:41.93, lng:-84.06}',
-    'Livingston': '{lat:42.59, lng:-83.91}',
-    'Luce': '{lat:46.5, lng:-85.55}',
-    'Mackinac': '{lat:46.08, lng:-84.89}',
-    'Macomb': '{lat:42.67, lng:-82.92}',
-    'Manistee': '{lat:44.32, lng:-86.05}',
-    'Marquette': '{lat:46.37, lng:-87.69}',
-    'Mason': '{lat:44.0, lng:-86.28}',
-    'Mecosta': '{lat:43.64, lng:-85.32}',
-    'Menominee': '{lat:45.5, lng:-87.55}',
-    'Midland': '{lat:43.65, lng:-84.39}',
-    'Missaukee': '{lat:44.32, lng:-85.09}',
-    'Monroe': '{lat:41.93, lng:-83.57}',
-    'Montcalm': '{lat:43.31, lng:-85.18}',
-    'Montmorency': '{lat:45.0, lng:-84.13}',
-    'Muskegon': '{lat:43.30, lng:-86.17}',
-    'Newaygo': '{lat:43.55, lng:-85.8}',
-    'Oakland': '{lat:42.66, lng:-83.39}',
-    'Oceana': '{lat:43.64, lng:-86.29}',
-    'Ogemaw': '{lat:44.32, lng:-84.13}',
-    'Ontonagon': '{lat:46.68, lng:-89.37}',
-    'Osceola': '{lat:44.0, lng:-85.33}',
-    'Oscoda': '{lat:44.68, lng:-84.13}',
-    'Otsego': '{lat:45.03, lng:-84.61}',
-    'Ottawa': '{lat:42.99, lng:-86.03}',
-    'Presque Isle': '{lat:45.29, lng:-83.93}',
-    'Roscommon': '{lat:44.34, lng:-84.61}',
-    'Saginaw': '{lat:43.35, lng:-84.03}',
-    'St. Clair': '{lat:42.89, lng:-82.7}',
-    'St. Joseph': '{lat:41.93, lng:-85.54}',
-    'Sanilac': '{lat:43.42, lng:-82.81}',
-    'Schoolcraft': '{lat:46.23, lng:-86.24}',
-    'Shiawassee': '{lat:42.97, lng:-84.15}',
-    'Tuscola': '{lat:43.48, lng:-83.4}',
-    'Van Buren': '{lat:42.26, lng:-86.06}',
-    'Washtenaw': '{lat:42.26, lng:-83.84}',
-    'Wayne': '{lat:42.26, lng:-83.31}',
-    'Wexford': '{lat:44.34, lng:-85.58}',
+center_dict = {
+    'Detroit': {
+        'center': '{lat: 42.35, lng: -83.10}',
+        'zoom': 11,
+        'minwidth': 550,
+        'minheight': 400
+    },
+    'Bay City': {
+        'center': '{lat: 43.58, lng: -83.88}',
+        'zoom': 12, #optimal: 13
+        'minwidth': 150, #optimal: 450
+        'minheight': 200 #optimal: 700
+    },
+    'Flint': {
+        'center': '{lat:43.01, lng:-83.70}',
+        'zoom': 11, #optimal: 12
+        'minwidth': 250, #optimal: 450
+        'minheight': 300 #optimal: 550
+    },
+    'Grand Rapids': {
+        'center': '{lat:42.96, lng:-85.66}',
+        'zoom': 11, #optimal: 12
+        'minwidth': 300, #optimal: 550
+        'minheight': 300, #optimal: 600
+    },
+    'Pontiac': {
+        'center': '{lat:42.65, lng:-83.29}',
+        'zoom': 12, #optimal: 12
+        'minwidth': 150, #optimal: 300
+        'minheight': 200, #optimal: 400
+    },
+    'Alcona': {
+        'center': '{lat:44.68, lng:-83.58}',
+        'minwidth': 450,
+        'minheight': 400
+    },
+    'Alger': {
+        'center': '{lat:46.42, lng:-86.49}',
+        'minwidth': 950,
+        'minheight': 600
+    },
+    'Allegan': {
+        'center': '{lat:42.59, lng:-85.91}',
+        'minwidth': 550,
+        'minheight': 350
+    },
+    'Alpena': {
+        'center': '{lat:45.03, lng:-83.58}',
+        'minwidth': 500,
+        'minheight': 400
+    },
+    'Antrim': {
+        'center': '{lat:45.01, lng:-85.14}',
+        'minwidth': 450,
+        'minheight': 450
+    },
+    'Arenac': {
+        'center': '{lat:44.04, lng:-83.87}',
+        'minwidth': 450,
+        'minheight': 300
+    },
+    'Baraga': {
+        'center': '{lat:46.69, lng:-88.34}',
+        'minwidth': 550,
+        'minheight': 600
+    },
+    'Barry': {
+        'center': '{lat:42.60, lng:-85.31}',
+        'minwidth': 350,
+        'minheight': 350
+    },
+    'Bay': {
+        'center': '{lat:43.7b, lng:-83.93}',
+        'minwidth': 350,
+        'minheight': 550
+    },
+    'Benzie': {
+        'center': '{lat:44.65, lng:-86.04}',
+        'minwidth': 350,
+        'minheight': 300
+    },
+    'Berrien': {
+        'center': '{lat:42.00, lng:-86.52}',
+        'minwidth': 450,
+        'minheight': 500
+    },
+    'Branch': {
+        'center': '{lat:41.92, lng:-85.06}',
+        'minwidth': 350,
+        'minheight': 350
+    },
+    'Calhoun': {
+        'center': '{lat:42.25, lng:-85.00}',
+        'minwidth': 450,
+        'minheight': 350
+    },
+    'Cass': {
+        'center': '{lat:41.92, lng:-85.99}',
+        'minwidth': 350,
+        'minheight': 350
+    },
+    'Charlevoix': {
+        'center': '{lat:45.48, lng:-85.22}',
+        'zoom': 9,
+        'minwidth': 400,
+        'minheight': 400
+    },
+    'Cheboygan': {
+        'center': '{lat:45.49, lng:-84.47}',
+        'minwidth': 400,
+        'minheight': 650
+    },
+    'Chippewa': {
+        'center': '{lat:46.34, lng:-84.36}',
+        'zoom': 9,
+        'minwidth': 650,
+        'minheight': 500
+    },
+    'Clare': {
+        'center': '{lat:44.00, lng:-84.85}',
+        'minwidth': 400,
+        'minheight': 400
+    },
+    'Clinton': {
+        'center': '{lat:42.94, lng:-84.60}',
+        'minwidth': 350,
+        'minheight': 350
+    },
+    'Crawford': {
+        'center': '{lat:44.68, lng:-84.61}',
+        'minwidth': 350,
+        'minheight': 400
+    },
+    'Delta': {
+        'center': '{lat:45.85, lng:-86.91}',
+        'minwidth': 700,
+        'minheight': 650
+    },
+    'Dickinson': {
+        'center': '{lat:45.98, lng:-87.88}',
+        'minwidth': 400,
+        'minheight': 550
+    },
+    'Eaton': {
+        'center': '{lat:42.60, lng:-84.84}',
+        'minwidth': 350,
+        'minheight': 350
+    },
+    'Emmet': {
+        'center': '{lat:45.53, lng:-84.93}',
+        'minwidth': 300,
+        'minheight': 600
+    },
+    'Genesee': {
+        'center': '{lat:43.00, lng:-83.69}',
+        'minwidth': 350,
+        'minheight': 450
+    },
+    'Gladwin': {
+        'center': '{lat:43.99, lng:-84.39}',
+        'minwidth': 350,
+        'minheight': 400
+    },
+    'Gogebic': {
+        'center': '{lat:46.43, lng:-89.70}',
+        'zoom': 9,
+        'minwidth': 550,
+        'minheight': 400
+    },
+    'Grand Traverse': {
+        'center': '{lat:44.75, lng:-85.57}',
+        'minwidth': 400,
+        'minheight': 500
+    },
+    'Gratiot': {
+        'center': '{lat:43.29, lng:-84.61}',
+        'minwidth': 350,
+        'minheight': 350
+    },
+    'Hillsdale': {
+        'center': '{lat:41.88, lng:-84.59}',
+        'minwidth': 350,
+        'minheight': 400
+    },
+    'Houghton': {
+        'center': '{lat:46.85, lng:-88.61}',
+        'zoom': 9,
+        'minwidth': 300,
+        'minheight': 500
+    },
+    'Huron': {
+        'center': '{lat:43.87, lng:-83.04}',
+        'minwidth': 650,
+        'minheight': 450
+    },
+    'Ingham': {
+        'center': '{lat:42.60, lng:-84.37}',
+        'minwidth': 350,
+        'minheight': 400
+    },
+    'Ionia': {
+        'center': '{lat:42.94, lng:-85.07}',
+        'minwidth': 350,
+        'minheight': 350
+    },
+    'Iosco': {
+        'center': '{lat:44.34, lng:-83.60}',
+        'minwidth': 450,
+        'minheight': 400
+    },
+    'Iron': {
+        'center': '{lat:46.17, lng:-88.55}',
+        'minwidth': 650,
+        'minheight': 550
+    },
+    'Isabella': {
+        'center': '{lat:43.64, lng:-84.85}',
+        'minwidth': 400,
+        'minheight': 400
+    },
+    'Jackson': {
+        'center': '{lat:42.25, lng:-84.42}',
+        'minwidth': 450,
+        'minheight': 350
+    },
+    'Kalamazoo': {
+        'center': '{lat:42.25, lng:-85.53}',
+        'minwidth': 350,
+        'minheight': 350
+    },
+    'Kalkaska': {
+        'center': '{lat:44.69, lng:-85.09}',
+        'minwidth': 400,
+        'minheight': 400
+    },
+    'Kent': {
+        'center': '{lat:43.03, lng:-85.55}',
+        'minwidth': 400,
+        'minheight': 550
+    },
+    'Keweenaw': {
+        'center': '{lat:47.70, lng:-88.49}',
+        'zoom': 9,
+        'minwidth': 600,
+        'minheight': 550
+    },
+    'Lake': {
+        'center': '{lat:43.99, lng:-85.80}',
+        'minwidth': 350,
+        'minheight': 400
+    },
+    'Lapeer': {
+        'center': '{lat:43.10, lng:-83.22}',
+        'minwidth': 350,
+        'minheight': 450
+    },
+    'Leelanau': {
+        'center': '{lat:45.11, lng:-85.84}',
+        'minwidth': 450,
+        'minheight': 700
+    },
+    'Lenawee': {
+        'center': '{lat:41.93, lng:-84.06}',
+        'minwidth': 450,
+        'minheight': 400
+    },
+    'Livingston': {
+        'center': '{lat:42.60, lng:-83.91}',
+        'minwidth': 400,
+        'minheight': 400
+    },
+    'Luce': {
+        'center': '{lat:46.50, lng:-85.55}',
+        'minwidth': 500,
+        'minheight': 550
+    },
+    'Mackinac': {
+        'center': '{lat:45.98, lng:-84.99}',
+        'zoom': 9,
+        'minwidth': 650,
+        'minheight': 300
+    },
+    'Macomb': {
+        'center': '{lat:42.67, lng:-82.91}',
+        'minwidth': 300,
+        'minheight': 450
+    },
+    'Manistee': {
+        'center': '{lat:44.34, lng:-86.10}',
+        'minwidth': 450,
+        'minheight': 400
+    },
+    'Marquette': {
+        'center': '{lat:46.45, lng:-87.62}',
+        'zoom': 9,
+        'minwidth': 400,
+        'minheight': 500
+    },
+    'Mason': {
+        'center': '{lat:44.00, lng:-86.28}',
+        'minwidth': 350,
+        'minheight': 400
+    },
+    'Mecosta': {
+        'center': '{lat:43.64, lng:-85.32}',
+        'minwidth': 350,
+        'minheight': 400
+    },
+    'Menominee': {
+        'center': '{lat:45.54, lng:-87.58}',
+        'zoom': 9,
+        'minwidth': 250,
+        'minheight': 500
+    },
+    'Midland': {
+        'center': '{lat:43.65, lng:-84.39}',
+        'minwidth': 350,
+        'minheight': 400
+    },
+    'Missaukee': {
+        'center': '{lat:44.34, lng:-85.09}',
+        'minwidth': 400,
+        'minheight': 400
+    },
+    'Monroe': {
+        'center': '{lat:41.91, lng:-83.48}',
+        'minwidth': 450,
+        'minheight': 400
+    },
+    'Montcalm': {
+        'center': '{lat:43.29, lng:-85.20}',
+        'minwidth': 550,
+        'minheight': 350
+    },
+    'Montmorency': {
+        'center': '{lat:45.03, lng:-84.13}',
+        'minwidth': 400,
+        'minheight': 400
+    },
+    'Muskegon': {
+        'center': '{lat:43.30, lng:-86.13}',
+        'minwidth': 500,
+        'minheight': 400
+    },
+    'Newaygo': {
+        'center': '{lat:43.55, lng:-85.80}',
+        'minwidth': 350,
+        'minheight': 550
+    },
+    'Oakland': {
+        'center': '{lat:42.66, lng:-83.39}',
+        'minwidth': 450,
+        'minheight': 500
+    },
+    'Oceana': {
+        'center': '{lat:43.64, lng:-86.29}',
+        'minwidth': 400,
+        'minheight': 400
+    },
+    'Ogemaw': {
+        'center': '{lat:44.33, lng:-84.13}',
+        'minwidth': 400,
+        'minheight': 400
+    },
+    'Ontonagon': {
+        'center': '{lat:46.68, lng:-89.38}',
+        'zoom': 9,
+        'minwidth': 400,
+        'minheight': 400
+    },
+    'Osceola': {
+        'center': '{lat:43.99, lng:-85.33}',
+        'minwidth': 350,
+        'minheight': 400
+    },
+    'Oscoda': {
+        'center': '{lat:44.68, lng:-84.13}',
+        'minwidth': 400,
+        'minheight': 400
+    },
+    'Otsego': {
+        'center': '{lat:45.03, lng:-84.61}',
+        'minwidth': 400,
+        'minheight': 400
+    },
+    'Ottawa': {
+        'center': '{lat:42.99, lng:-86.03}',
+        'minwidth': 400,
+        'minheight': 450
+    },
+    'Presque Isle': {
+        'center': '{lat:45.41, lng:-83.82}',
+        'minwidth': 650,
+        'minheight': 450
+    },
+    'Roscommon': {
+        'center': '{lat:44.34, lng:-84.61}',
+        'minwidth': 400,
+        'minheight': 400
+    },
+    'Saginaw': {
+        'center': '{lat:43.35, lng:-84.03}',
+        'minwidth': 500,
+        'minheight': 450
+    },
+    'St. Clair': {
+        'center': '{lat:42.84, lng:-82.70}',
+        'minwidth': 450,
+        'minheight': 650
+    },
+    'St. Joseph': {
+        'center': '{lat:41.92, lng:-85.54}',
+        'minwidth': 400,
+        'minheight': 350
+    },
+    'Sanilac': {
+        'center': '{lat:43.42, lng:-82.81}',
+        'minwidth': 450,
+        'minheight': 550
+    },
+    'Schoolcraft': {
+        'center': '{lat:46.13, lng:-86.24}',
+        'minwidth': 550,
+        'minheight': 800
+    },
+    'Shiawassee': {
+        'center': '{lat:42.95, lng:-84.15}',
+        'minwidth': 350,
+        'minheight': 400
+    },
+    'Tuscola': {
+        'center': '{lat:43.48, lng:-83.40}',
+        'minwidth': 450,
+        'minheight': 550
+    },
+    'Van Buren': {
+        'center': '{lat:42.24, lng:-86.06}',
+        'minwidth': 450,
+        'minheight': 350
+    },
+    'Washtenaw': {
+        'center': '{lat:42.25, lng:-83.84}',
+        'minwidth': 450,
+        'minheight': 400
+    },
+    'Wayne': {
+        'center': '{lat:42.24, lng:-83.21}',
+        'minwidth': 500,
+        'minheight': 450
+    },
+    'Wexford': {
+        'center': '{lat:44.28, lng:-85.58}',
+        'minwidth': 400,
+        'minheight': 400
+    },
 }
 cities = ['Bay City','Detroit','Flint','Grand Rapids','Pontiac']
 counties = [county for county in center_dict.keys() if county not in cities]
