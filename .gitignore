@@ -3,6 +3,7 @@
 *.json
 *.txt
 *.hl7
+!cities.csv
 data/
 pdfs/
 screenshot/
