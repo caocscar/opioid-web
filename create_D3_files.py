@@ -74,6 +74,7 @@ def create_county_files(county, src, T0, T1=None):
     create_race_file(cty_date)
     create_gender_file(cty_date)
     create_gps_file(cty_date, T0, T_end)
+    create_evt_table_file(cty_date,county,src)
 
 def create_daily_file(T_start, T_end, daily):
     daily_subset = daily[daily['date'].between(T_start,T_end)]        
@@ -95,7 +96,18 @@ def create_gender_file(cty_date):
     gender = cty_date['gender'].value_counts()
     gender = gender.reindex(genderlist, fill_value=0)
     gender = gender.reset_index()
-    gender.to_csv(os.path.join(savedir,'county_src_gender.csv'), index=False, header=headers)        
+    gender.to_csv(os.path.join(savedir,'county_src_gender.csv'), index=False, header=headers)
+
+def create_evt_table_file(cty_date,county,src):
+    if src == "EMS":
+        tmpTab = cty_date[['date','city','zipcode']]
+        tmpTab.to_csv(os.path.join(savedir,'county_src_evttab.csv'), index=False)
+    elif src == "ME" and county == "Wayne":
+        tmpTab = cty_date[['date','city','zipcode','suspected_indicator']]
+        tmpTab.to_csv(os.path.join(savedir,'county_src_evttab.csv'), index=False)
+    elif src == "ME":
+        tmpTab = cty_date[['date','city','zipcode']]
+        tmpTab.to_csv(os.path.join(savedir,'county_src_evttab.csv'), index=False)
 
 def create_gps_file(cty_date, T0, T_end):
     if T0 <= 14:
