@@ -29,7 +29,7 @@ for file in files:
     dataset = file.split('_')[1]
     tmp['src'] = dataset.strip('.csv')
     list_df.append(tmp)
-df = pd.concat(list_df,ignore_index=True)
+df = pd.concat(list_df,ignore_index=True,sort=True)
 
 #%%
 def get_firstday(T0, latest_date):
@@ -103,10 +103,10 @@ def create_evt_table_file(cty_date,county,src):
         tmpTab = cty_date[['date','city','zipcode']]
         tmpTab.to_csv(os.path.join(savedir,'county_src_evttab.csv'), index=False)
     elif src == "ME" and county == "Wayne":
-        tmpTab = cty_date[['date','city','zipcode','suspected_indicator']]
+        tmpTab = cty_date[['date','city','location','suspected_indicator']]
         tmpTab.to_csv(os.path.join(savedir,'county_src_evttab.csv'), index=False)
     elif src == "ME":
-        tmpTab = cty_date[['date','city','zipcode']]
+        tmpTab = cty_date[['date','city','location']]
         tmpTab.to_csv(os.path.join(savedir,'county_src_evttab.csv'), index=False)
 
 def create_gps_file(cty_date, T0, T_end):
