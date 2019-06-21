@@ -5,6 +5,7 @@ Created on Thu Mar  7 14:36:25 2019
 @author: umhs-caoa
 """
 import pandas as pd
+import numpy as np
 import os
 from opioid_dict import race_dict, gender_dict, cities
 from datetime import datetime
@@ -69,7 +70,11 @@ def create_county_files(county, src, T0, T1=None):
     create_daily_file(T_start, T_end, daily)
     # date filtering
     cty_date = cty[cty['date'].between(T_start,T_end)]
-    # age, race, gender, gps file
+    # rate and change table
+    dayswin = (pd.to_datetime(T_end) - pd.to_datetime(T_start)).days + 1
+    evtrte = len(cty_date)/dayswin
+    create_rte_table_file(cty,T_start,dayswin,evtrte)
+    # age, race, gender, gps, event file
     create_age_file(cty_date)
     create_race_file(cty_date)
     create_gender_file(cty_date)
@@ -108,6 +113,18 @@ def create_evt_table_file(cty_date,county,src):
     elif src == "ME":
         tmpTab = cty_date[['date','city','location']]
         tmpTab.to_csv(os.path.join(savedir,'county_src_evttab.csv'), index=False)
+        
+def create_rte_table_file(cty,T_start,days,evtrte):
+    pp_end = pd.to_datetime(T_start) + pd.DateOffset(days=-1)
+    pp_start = pp_end + pd.DateOffset(days=-days+1)
+    cty_pp = cty[cty['date'].between(pp_start,pp_end)]
+    pp_evtrte = len(cty_pp)/days
+    if pp_start < pd.to_datetime("20190101") or pp_evtrte == 0:
+        rtetab = pd.DataFrame({'rate':[round(evtrte,1)],'change':[np.NaN]})
+        rtetab.to_csv(os.path.join(savedir,'county_src_ratechange.csv'), index=False)
+    else:
+        rtetab = pd.DataFrame({'rate':[round(evtrte,1)],'change':[round((evtrte-pp_evtrte)/pp_evtrte*100,1)]})
+        rtetab.to_csv(os.path.join(savedir,'county_src_ratechange.csv'), index=False)
 
 def create_gps_file(cty_date, T0, T_end):
     if T0 <= 14:
