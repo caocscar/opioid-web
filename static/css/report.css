@@ -76,7 +76,7 @@ tspan {
 }
 
 #logos {
-  
+
 }
 
 /* table */
@@ -103,6 +103,17 @@ td, th {
 }
 #summary tr {
   background: rgb(255, 203, 5);
+}
+
+#MeanAndChange td{
+  font-size: 25px;
+  font-weight: bold;
+}
+
+@media print{
+  .alltables{
+    page-break-before: always;
+  }
 }
 
 /* selenium save to pdf print settings */
