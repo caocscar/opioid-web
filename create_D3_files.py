@@ -106,12 +106,15 @@ def create_gender_file(cty_date):
 def create_evt_table_file(cty_date,county,src):
     if src == "EMS":
         tmpTab = cty_date[['date','city','zipcode']]
+        tmpTab.columns = ['Date','City','Zip Code']
         tmpTab.to_csv(os.path.join(savedir,'county_src_evttab.csv'), index=False)
     elif src == "ME" and county == "Wayne":
         tmpTab = cty_date[['date','city','location','suspected_indicator']]
+        tmpTab.columns = ['Date','City','Location','Suspected Overdose Indicator']
         tmpTab.to_csv(os.path.join(savedir,'county_src_evttab.csv'), index=False)
     elif src == "ME":
         tmpTab = cty_date[['date','city','location']]
+        tmpTab.columns = ['Date','City','Location']
         tmpTab.to_csv(os.path.join(savedir,'county_src_evttab.csv'), index=False)
         
 def create_rte_table_file(cty,T_start,days,evtrte):
@@ -120,10 +123,10 @@ def create_rte_table_file(cty,T_start,days,evtrte):
     cty_pp = cty[cty['date'].between(pp_start,pp_end)]
     pp_evtrte = len(cty_pp)/days
     if pp_start < pd.to_datetime("20190101") or pp_evtrte == 0:
-        rtetab = pd.DataFrame({'rate':[round(evtrte,1)],'change':[np.NaN]})
+        rtetab = pd.DataFrame({'Mean Incidents Per Day':[round(evtrte,1)],'Percent Change Since Last Period':[np.NaN]})
         rtetab.to_csv(os.path.join(savedir,'county_src_ratechange.csv'), index=False)
     else:
-        rtetab = pd.DataFrame({'rate':[round(evtrte,1)],'change':[round((evtrte-pp_evtrte)/pp_evtrte*100,1)]})
+        rtetab = pd.DataFrame({'Mean Incidents Per Day':[round(evtrte,1)],'Percent Change Since Last Period':[round((evtrte-pp_evtrte)/pp_evtrte*100,1)]})
         rtetab.to_csv(os.path.join(savedir,'county_src_ratechange.csv'), index=False)
 
 def create_gps_file(cty_date, T0, T_end):
