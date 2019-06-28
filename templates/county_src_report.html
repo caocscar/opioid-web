@@ -11,6 +11,7 @@
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
   <div class="container-fluid">
@@ -38,7 +39,7 @@
     {% elif data.src == 'ED' %}
       <p>More recent overdose resident locations (points perturbed) appear darker, and less recent resident locations appear more translucent</p>
     {% endif %}
-    
+
     <!-- Bar Line Combo -->
     <div class='barline'></div>
 
@@ -48,7 +49,8 @@
       <div class="col-md-4 Race"></div>
       <div class="col-md-4 Gender"></div>
     </div>
-    
+
+
     <!-- Footer -->
     <footer>
       <div class="row" style="background: url({{ url_for('static',filename='img/HIDTA.png') }}) top right no-repeat; background-size: 75px 80px; height: 82px;">
@@ -68,7 +70,35 @@
         </div>
       </div>
     </footer>
-  </div>
+<!-- tables under footer -->
+    <div class= "alltables">
+      <h2> Mean and Percent Change</h2>
+      <div class="table-responsive">
+        <table id="MeanAndChange" class="table table-bordered table-striped table-hover">
+        </table>
+      </div>
+      {% if data.src == "EMS" %}
+      <h2>{{ data.src }} Table</h2>
+      <div class="table-responsive">
+        <table id="EMStable" class="table table-bordered table-striped table-hover">
+        </table>
+      </div>
+      {% elif data.src == "ME" %}
+        {% if data.county == "Wayne" %}
+          <h2>{{ data.src }} Table</h2>
+          <div class="table-responsive">
+            <table id="wayneMEtable" class="table table-bordered table-striped table-hover">
+            </table>
+          </div>
+        {% else %}
+          <h2>{{ data.src }} Table</h2>
+          <div class="table-responsive">
+            <table id="MEtable" class="table table-bordered table-striped table-hover">
+            </table>
+          </div>
+        {% endif %}
+      {% endif %}
+    </div>
 
   <script>
     var zoom = {{ data.zoom }}
@@ -79,14 +109,42 @@
   <script src="/static/js/gmap.js"></script>
   <script src="/static/js/bar_line_chart.js"></script>
   <script src="/static/js/donut_chart.js"></script>
+  <script src="/static/js/table.js"></script>
   <script>
     make_bar_line_chart("{{ url_for('static',filename='data/county_src_daily.csv') }}");
     make_donut_chart("{{ url_for('static',filename='data/county_src_age.csv') }}",'Age');
     make_donut_chart("{{ url_for('static',filename='data/county_src_race.csv') }}",'Race');
     make_donut_chart("{{ url_for('static',filename='data/county_src_gender.csv') }}",'Gender');
+    makeMeanTable("MeanAndChange", "{{ url_for('static',filename='data/county_src_ratechange.csv') }}");
+
   </script>
   <script async defer
   src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBWcrEjQkOP_N22KyU6aPQitc4O-47sWCQ&callback=initMap">
   </script>
+
+{% if data.src == 'EMS' %}
+  <script>
+    makeTable("EMStable", "{{ url_for('static',filename='data/county_src_evttab.csv') }}");
+  </script>
+{% endif %}
+
+{% if data.src == 'ME'%}
+  {% if data.county == 'Wayne' %}
+    <script>
+      makeTable("wayneMEtable", "{{ url_for('static',filename='data/county_src_evttab.csv') }}");
+    </script>
+  {% else %}
+    <script>
+      makeTable("MEtable", "{{ url_for('static',filename='data/county_src_evttab.csv') }}");
+    </script>
+  {% endif %}
+{% endif %}
+
+{% if data.src == 'ED' %}
+  <script>
+
+  </script>
+{% endif %}
+
 </body>
 </html>
