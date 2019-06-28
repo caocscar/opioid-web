@@ -104,6 +104,7 @@ def create_gender_file(cty_date):
     gender.to_csv(os.path.join(savedir,'county_src_gender.csv'), index=False, header=headers)
 
 def create_evt_table_file(cty_date,county,src):
+    cty_date = cty_date.sort_values(by=['date', 'zipcode'])
     if src == "EMS":
         tmpTab = cty_date[['date','city','zipcode']]
         tmpTab.columns = ['Date','City','Zip Code']
