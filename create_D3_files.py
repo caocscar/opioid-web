@@ -107,14 +107,17 @@ def create_evt_table_file(cty_date,county,src):
     if src == "EMS":
         tmpTab = cty_date[['date','city','zipcode']]
         tmpTab.columns = ['Date','City','Zip Code']
+        tmpTab = tmpTab.replace({'City':r'.*\d.*'},{'City':np.NaN},regex=True)
         tmpTab.to_csv(os.path.join(savedir,'county_src_evttab.csv'), index=False)
     elif src == "ME" and county == "Wayne":
         tmpTab = cty_date[['date','city','location','suspected_indicator']]
         tmpTab.columns = ['Date','City','Location','Suspected Overdose Indicator']
+        tmpTab = tmpTab.replace({'City':r'.*\d.*'},{'City':np.NaN},regex=True)
         tmpTab.to_csv(os.path.join(savedir,'county_src_evttab.csv'), index=False)
     elif src == "ME":
         tmpTab = cty_date[['date','city','location']]
         tmpTab.columns = ['Date','City','Location']
+        tmpTab = tmpTab.replace({'City':r'.*\d.*'},{'City':np.NaN},regex=True)
         tmpTab.to_csv(os.path.join(savedir,'county_src_evttab.csv'), index=False)
         
 def create_rte_table_file(cty,T_start,days,evtrte):
