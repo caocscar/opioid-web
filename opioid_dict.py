@@ -47,7 +47,7 @@ gender_dict = {'F':'Female',
                }
 center_dict = {
     'Ann Arbor': {
-        'center': '{lat: 42.28, lng: -83.74}',
+        'center': '{lat: 42.28, lng: -83.73}',
         'zoom' : 12,
         'minwidth': 550,
         'minheight':400
