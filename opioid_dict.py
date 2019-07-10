@@ -46,6 +46,18 @@ gender_dict = {'F':'Female',
                'Not Applicable':'Unknown',
                }
 center_dict = {
+    'Ann Arbor': {
+        'center': '{lat: 42.28, lng: -83.74}',
+        'zoom' : 12,
+        'minwidth': 550,
+        'minheight':400
+    },
+    'Ypsilanti':{
+        'center': '{lat: 42.24, lng: -83.61}',
+        'zoom' : 13,
+        'minwidth' : 500,
+        'minheight' : 400
+    },
     'Detroit': {
         'center': '{lat: 42.35, lng: -83.10}',
         'zoom': 11,
@@ -501,5 +513,5 @@ center_dict = {
         'minheight': 400
     },
 }
-cities = ['Bay City','Detroit','Flint','Grand Rapids','Pontiac']
+cities = ['Bay City','Detroit','Flint','Grand Rapids','Pontiac', 'Ann Arbor', 'Ypsilanti']
 counties = [county for county in center_dict.keys() if county not in cities]
