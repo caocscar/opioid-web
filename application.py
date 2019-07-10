@@ -1,6 +1,6 @@
 from flask import Flask, render_template
 from opioid_dict import src_dict, center_dict, cities, counties
-# from create_D3_files import create_county_files
+from create_D3_files import create_county_files
 
 application = Flask(__name__)
 application.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
