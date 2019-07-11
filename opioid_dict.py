@@ -48,54 +48,63 @@ gender_dict = {'F':'Female',
 center_dict = { "City" :
     {'Ann Arbor': {
         'center': '{lat: 42.28, lng: -83.73}',
+        'county': 'Washtenaw',
         'zoom' : 12,
         'minwidth': 550,
         'minheight':400
     },
     'Ypsilanti':{
         'center': '{lat: 42.24, lng: -83.61}',
+        'county' : 'Washtenaw',
         'zoom' : 13,
         'minwidth' : 500,
         'minheight' : 400
     },
     'Detroit': {
         'center': '{lat: 42.35, lng: -83.10}',
+        'county': 'Wayne',
         'zoom': 11,
         'minwidth': 550,
         'minheight': 400
     },
     'Bay City': {
         'center': '{lat: 43.58, lng: -83.88}',
+        'county': 'Bay',
         'zoom': 12, #optimal: 13
         'minwidth': 150, #optimal: 450
         'minheight': 200 #optimal: 700
     },
     'Flint': {
         'center': '{lat:43.01, lng:-83.70}',
+        'county': 'Genesee',
         'zoom': 12, #optimal: 12
         'minwidth': 250, #optimal: 450
         'minheight': 300 #optimal: 550
     },
     'Grand Rapids': {
         'center': '{lat:42.96, lng:-85.66}',
+        'county': 'Kent',
         'zoom': 12, #optimal: 12
         'minwidth': 300, #optimal: 550
         'minheight': 300, #optimal: 600
     },
     'Pontiac': {
         'center': '{lat:42.65, lng:-83.29}',
+        'county': 'Oakland',
         'zoom': 12, #optimal: 12
         'minwidth': 150, #optimal: 300
         'minheight': 200, #optimal: 400
     },
     'Kalamazoo':{
         'center': '{lat:42.29, lng: -85.58}',
+        'county': 'Kalamazoo',
         'zoom': 12,
         'minwidth':150,
         'minheight': 200
     },
     'Muskegon':{
         'center':  '{lat:43.23, lng: -86.25}',
+        'county': 'Muskegon',
         'zoom': 12,
         'minwidth':150,
         'minheight': 200
@@ -103,6 +112,7 @@ center_dict = { "City" :
 
     'Saginaw':{
         'center': '{lat: 43.42, lng: -83.95}',
+        'county': 'Saginaw',
         'zoom': 12,
         'minwidth': 150,
         'minheight': 200

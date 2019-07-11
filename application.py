@@ -57,6 +57,7 @@ def generate_report_given_name():
             'placename': city,
             'propername': propername,
             'cityorcounty': "city",
+            'county':center_dict["City"][propername]["county"],
             'src': source,
             'county_flag': county_flag,
             'titlename': src_dict[source],
