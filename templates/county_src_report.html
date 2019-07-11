@@ -19,18 +19,22 @@
     <div id="sos-title" class="row" style="background: url({{ url_for('static',filename='img/SOS.png') }}) top right no-repeat; background-size: 105px 80px;">
       <div class="col-md-12">
         {% if data.cityorcounty == "city" %}
+
           {% if data.src in ['EMS', 'ME'] %}
             <h1>City of {{data.propername}} {{data.county_flag}}</h1>
           {% else %}
             <h1> City of {{data.propername}} {{data.county_flag}} {{data.titlename}}</h1>
           {% endif %}
+
         {% else %}
           {% if data.src in ['EMS', 'ME'] %}
             <h1>{{ data.placename }} {{ data.county_flag }}</h1>
           {% else %}
             <h1>{{ data.placename }} {{ data.county_flag }} {{data.titlename}}</h1>
           {% endif %}
+
         {% endif %}
+
         <h3>
         {% if data.src == 'EMS' %}
           EMS Naloxone Administration Locations
@@ -97,20 +101,20 @@
         </table>
       </div>
       {% if data.src == "EMS" %}
-      <h2>{{ data.src }} Table</h2>
-      <div class="table-responsive">
-        <table id="EMStable" class="table table-bordered table-striped table-hover">
-        </table>
-      </div>
+        <h2>EMS Table</h2>
+        <div class="table-responsive">
+          <table id="EMStable" class="table table-bordered table-striped table-hover">
+          </table>
+        </div>
       {% elif data.src == "ME" %}
-        {% if data.placename == "Wayne" or data.placename == "Detroit" %}
-          <h2>{{ data.src }} Table</h2>
+        {% if data.placename in ['Wayne', 'Detroit'] %}
+          <h2> Wayne County ME Table</h2>
           <div class="table-responsive">
             <table id="wayneMEtable" class="table table-bordered table-striped table-hover">
             </table>
           </div>
         {% else %}
-          <h2>{{ data.src }} Table</h2>
+          <h2>ME Table</h2>
           <div class="table-responsive">
             <table id="MEtable" class="table table-bordered table-striped table-hover">
             </table>
@@ -148,7 +152,7 @@
 {% endif %}
 
 {% if data.src == 'ME'%}
-  {% if data.placename == 'Wayne' or data.placename == 'Detroit'%}
+  {% if data.placename in ['Wayne', 'Detroit']%}
     <script>
       makeTable("wayneMEtable", "{{ url_for('static',filename='data/county_src_evttab.csv') }}");
     </script>
