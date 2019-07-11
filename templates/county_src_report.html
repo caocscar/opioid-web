@@ -148,7 +148,7 @@
 {% endif %}
 
 {% if data.src == 'ME'%}
-  {% if data.placename == 'Wayne' %}
+  {% if data.placename == 'Wayne' or data.placename == 'Detroit'%}
     <script>
       makeTable("wayneMEtable", "{{ url_for('static',filename='data/county_src_evttab.csv') }}");
     </script>
