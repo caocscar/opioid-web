@@ -48,7 +48,7 @@ async function make_map(svgname, src) {
       .attr("id", "tooltips")
       .attr("data-toggle", "tooltip")
       .attr("title", d => d.properties.name)
-      .on("click", d => window.location.href += d.properties.name + "/" + src)
+      .on("click", d => window.location.href = "/dashboard?src=" + src + "&county=" + d.properties.name)
       $(function() {
         $('[data-toggle="tooltip"]').tooltip()
       })
@@ -62,7 +62,7 @@ async function make_map(svgname, src) {
         .attr('cx', d => projection([d.lng,d.lat])[0])
         .attr('cy', d => projection([d.lng,d.lat])[1])
         .attr("title", d => d.name)
-        .on("click", d => window.location.href += d.name + "/" + src)
+        .on("click", d => window.location.href = "/dashboard?src=" + src + "&city=" + d.name)
         $(function() {
           $('[data-toggle="tooltip"]').tooltip()
         })
