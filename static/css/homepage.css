@@ -25,15 +25,15 @@ h1, .p {
 
 
 .EMS.county {
-  fill: #587abc; /* CANHAM POOL BLUE */
+  fill: #a79d96; /* ANGELL HALL ASH */
 }
 
 .ED.county {
-  fill: #575294; /* MATTHAEI VIOLET */
+  fill: #9b9a6d; /* BURTON TOWER BEIGE */
 }
 
 .ME.county {
-  fill: #00274c; /* BLUE */
+  fill :#989c97; /* THE ROCK GRAY */
 }
 
 .mapEMS, .mapED, .mapME {

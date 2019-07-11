@@ -39,7 +39,7 @@ def get_firstday(T0, latest_date):
         return f'{T0[:4]}-{T0[4:6]}-{T0[6:]}'
     else:
         return (latest_date + pd.DateOffset(days=-T0+1)).strftime('%Y-%m-%d')
-    
+
 def get_lastday(T1, latest_date):
     if T1:
         T1 = str(T1)
@@ -47,9 +47,9 @@ def get_lastday(T1, latest_date):
     else:
         return latest_date.strftime('%Y-%m-%d')
 
-def create_county_files(county, src, T0, T1=None):
-    column = 'city' if county in cities else 'county'   
-    cty = df[(df[column] == county) & (df['src'] == src)]      
+def create_county_files(name, src, cityorcounty, T0, T1=None):
+    column = 'city' if cityorcounty = "City" else 'county'
+    cty = df[(df[column] == name) & (df['src'] == src)]
     # daily file
     latest_date = df.loc[df['src'] == src,'date'].max()
     T_start = get_firstday(T0, latest_date)
@@ -59,7 +59,7 @@ def create_county_files(county, src, T0, T1=None):
         cty_date = cty
         daily = pd.Series()
     else:
-        earliest_date = cty['date'].min().strftime('%Y-%m-%d')  
+        earliest_date = cty['date'].min().strftime('%Y-%m-%d')
         ts = cty.set_index('date')
         daily = ts[column].resample('D').count()
     daterange = pd.date_range(earliest_date, latest_date, freq='D')
@@ -70,19 +70,14 @@ def create_county_files(county, src, T0, T1=None):
     create_daily_file(T_start, T_end, daily)
     # date filtering
     cty_date = cty[cty['date'].between(T_start,T_end)]
-    # rate and change table
-    dayswin = (pd.to_datetime(T_end) - pd.to_datetime(T_start)).days + 1
-    evtrte = len(cty_date)/dayswin
-    create_rte_table_file(cty,T_start,dayswin,evtrte)
-    # age, race, gender, gps, event file
+    # age, race, gender, gps file
     create_age_file(cty_date)
     create_race_file(cty_date)
     create_gender_file(cty_date)
     create_gps_file(cty_date, T0, T_end)
-    create_evt_table_file(cty_date,county,src)
 
 def create_daily_file(T_start, T_end, daily):
-    daily_subset = daily[daily['date'].between(T_start,T_end)]        
+    daily_subset = daily[daily['date'].between(T_start,T_end)]
     daily_subset.to_csv(os.path.join(savedir,'county_src_daily.csv'), index=False)
 
 def create_age_file(cty_date):
@@ -96,7 +91,7 @@ def create_race_file(cty_date):
     race = race.reindex(racelist, fill_value=0)
     race = race.reset_index()
     race.to_csv(os.path.join(savedir,'county_src_race.csv'), index=False, header=headers)
-    
+
 def create_gender_file(cty_date):
     gender = cty_date['gender'].value_counts()
     gender = gender.reindex(genderlist, fill_value=0)
@@ -120,7 +115,7 @@ def create_evt_table_file(cty_date,county,src):
         tmpTab.columns = ['Date','City','Location']
         tmpTab = tmpTab.replace({'City':r'.*\d.*'},{'City':np.NaN},regex=True)
         tmpTab.to_csv(os.path.join(savedir,'county_src_evttab.csv'), index=False)
-        
+
 def create_rte_table_file(cty,T_start,days,evtrte):
     pp_end = pd.to_datetime(T_start) + pd.DateOffset(days=-1)
     pp_start = pp_end + pd.DateOffset(days=-days+1)
@@ -135,7 +130,7 @@ def create_rte_table_file(cty,T_start,days,evtrte):
 
 def create_gps_file(cty_date, T0, T_end):
     if T0 <= 14:
-        cty_date['opacity'] = 1   
+        cty_date['opacity'] = 1
     else:
         enddate = pd.to_datetime(T_end)
         if T0 >= 20000000:
@@ -148,9 +143,7 @@ def create_gps_file(cty_date, T0, T_end):
     with open(os.path.join(savedir,'county_src_gps.js'),'w') as fout:
         fout.write('var event_pts = ')
         cty_date[['lat','lng','opacity']].to_json(fout, orient='records')
-        
+
 #%%
 if __name__ == '__main__':
     create_county_files('Wayne','EMS', 20190224, 20190308)
-
-

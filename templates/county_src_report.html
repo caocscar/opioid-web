@@ -18,14 +18,30 @@
     <!-- Heading -->
     <div id="sos-title" class="row" style="background: url({{ url_for('static',filename='img/SOS.png') }}) top right no-repeat; background-size: 105px 80px;">
       <div class="col-md-12">
-        <h1>{{ data.county }} {{ data.county_flag }} {{ data.titlename }}</h1>
+        {% if data.cityorcounty == "city" %}
+
+          {% if data.src in ['EMS', 'ME'] %}
+            <h1>City of {{data.propername}} {{data.county_flag}}</h1>
+          {% else %}
+            <h1> City of {{data.propername}} {{data.county_flag}} {{data.titlename}}</h1>
+          {% endif %}
+
+        {% else %}
+          {% if data.src in ['EMS', 'ME'] %}
+            <h1>{{ data.placename }} {{ data.county_flag }}</h1>
+          {% else %}
+            <h1>{{ data.placename }} {{ data.county_flag }} {{data.titlename}}</h1>
+          {% endif %}
+
+        {% endif %}
+
         <h3>
         {% if data.src == 'EMS' %}
-          Naloxone Administration Locations
+          EMS Naloxone Administration Locations
         {% elif data.src == 'ED' %}
           Patients with Opioid Overdose ICD-10 Codes
         {% elif data.src == 'ME' %}
-          Suspected Fatal Opioid Overdoses
+          Suspected Fatal Opioid Overdose Locations
         {% endif %}
         </h3>
         <h3 class='daterange'></h3>
@@ -36,6 +52,9 @@
     <div id="map"></div>
     {% if data.src in ['EMS','ME'] %}
       <p>More recent overdose incident locations appear darker, and less recent incident locations appear more translucent</p>
+      {% if data.src == 'EMS' %}
+        <p id="locationdisclaimer">*Locations approximate</p>
+      {% endif %}
     {% elif data.src == 'ED' %}
       <p>More recent overdose resident locations (points perturbed) appear darker, and less recent resident locations appear more translucent</p>
     {% endif %}
@@ -56,14 +75,18 @@
       <div class="row" style="background: url({{ url_for('static',filename='img/HIDTA.png') }}) top right no-repeat; background-size: 75px 80px; height: 82px;">
         <div class="col-md-12">
           <p style="margin-bottom: 8px;">
-            {% if data.src == 'EMS' and data.county == 'Washtenaw' %}
+            {% if data.src == 'EMS' and data.placename == 'Washtenaw' %}
               Data Source: Huron Valley Ambulance
             {% elif data.src == 'EMS' %}
-              Data Source: MI-EMSIS
+              Data Source: Michigan EMS Information System (MI-EMSIS)
             {% elif data.src == 'ED' %}
               Data Source: Health Information Exchange Admit Discharge Transfer (ADT) message
             {% elif data.src == 'ME' %}
-              Data Source: {{ data.county }} {{ data.county_flag }} Medical Examiner
+              {% if data.cityorcounty == "city" %}
+                Data Source: {{ data.county }} County {{ data.county_flag }} Medical Examiner
+              {% else %}
+                Data Source: {{ data.placename }} {{ data.county_flag }} Medical Examiner
+              {% endif %}
             {% endif %}
           </p>
           <img height="25" src="{{ url_for('static',filename='img/IPC.png') }}" alternate="Injury Prevention Center Logo">
@@ -78,20 +101,20 @@
         </table>
       </div>
       {% if data.src == "EMS" %}
-      <h2>{{ data.src }} Table</h2>
-      <div class="table-responsive">
-        <table id="EMStable" class="table table-bordered table-striped table-hover">
-        </table>
-      </div>
+        <h2>EMS Table</h2>
+        <div class="table-responsive">
+          <table id="EMStable" class="table table-bordered table-striped table-hover">
+          </table>
+        </div>
       {% elif data.src == "ME" %}
-        {% if data.county == "Wayne" %}
-          <h2>{{ data.src }} Table</h2>
+        {% if data.placename in ['Wayne', 'Detroit'] %}
+          <h2> Wayne County ME Table</h2>
           <div class="table-responsive">
             <table id="wayneMEtable" class="table table-bordered table-striped table-hover">
             </table>
           </div>
         {% else %}
-          <h2>{{ data.src }} Table</h2>
+          <h2>ME Table</h2>
           <div class="table-responsive">
             <table id="MEtable" class="table table-bordered table-striped table-hover">
             </table>
@@ -129,7 +152,7 @@
 {% endif %}
 
 {% if data.src == 'ME'%}
-  {% if data.county == 'Wayne' %}
+  {% if data.placename in ['Wayne', 'Detroit']%}
     <script>
       makeTable("wayneMEtable", "{{ url_for('static',filename='data/county_src_evttab.csv') }}");
     </script>

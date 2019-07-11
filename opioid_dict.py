@@ -45,56 +45,88 @@ gender_dict = {'F':'Female',
                'Unknown (Unable to Determine)':'Unknown',
                'Not Applicable':'Unknown',
                }
-center_dict = {
-    'Ann Arbor': {
+center_dict = { "City" :
+    {'Ann Arbor': {
         'center': '{lat: 42.28, lng: -83.73}',
+        'county': 'Washtenaw',
         'zoom' : 12,
         'minwidth': 550,
         'minheight':400
     },
     'Ypsilanti':{
         'center': '{lat: 42.24, lng: -83.61}',
+        'county' : 'Washtenaw',
         'zoom' : 13,
         'minwidth' : 500,
         'minheight' : 400
     },
     'Detroit': {
         'center': '{lat: 42.35, lng: -83.10}',
+        'county': 'Wayne',
         'zoom': 11,
         'minwidth': 550,
         'minheight': 400
     },
     'Bay City': {
         'center': '{lat: 43.58, lng: -83.88}',
+        'county': 'Bay',
         'zoom': 12, #optimal: 13
         'minwidth': 150, #optimal: 450
         'minheight': 200 #optimal: 700
     },
     'Flint': {
         'center': '{lat:43.01, lng:-83.70}',
-        'zoom': 11, #optimal: 12
+        'county': 'Genesee',
+        'zoom': 12, #optimal: 12
         'minwidth': 250, #optimal: 450
         'minheight': 300 #optimal: 550
     },
     'Grand Rapids': {
         'center': '{lat:42.96, lng:-85.66}',
-        'zoom': 11, #optimal: 12
+        'county': 'Kent',
+        'zoom': 12, #optimal: 12
         'minwidth': 300, #optimal: 550
         'minheight': 300, #optimal: 600
     },
     'Pontiac': {
         'center': '{lat:42.65, lng:-83.29}',
+        'county': 'Oakland',
         'zoom': 12, #optimal: 12
         'minwidth': 150, #optimal: 300
         'minheight': 200, #optimal: 400
     },
-    'Alcona': {
+    'Kalamazoo':{
+        'center': '{lat:42.29, lng: -85.58}',
+        'county': 'Kalamazoo',
+        'zoom': 12,
+        'minwidth':150,
+        'minheight': 200
+    },
+    'Muskegon':{
+        'center':  '{lat:43.23, lng: -86.25}',
+        'county': 'Muskegon',
+        'zoom': 12,
+        'minwidth':150,
+        'minheight': 200
+    },
+
+    'Saginaw':{
+        'center': '{lat: 43.42, lng: -83.95}',
+        'county': 'Saginaw',
+        'zoom': 12,
+        'minwidth': 150,
+        'minheight': 200
+    }},
+
+    'County':
+    {'Alcona': {
         'center': '{lat:44.68, lng:-83.58}',
         'minwidth': 450,
         'minheight': 400
     },
     'Alger': {
         'center': '{lat:46.42, lng:-86.49}',
+        'zoom': 9,
         'minwidth': 950,
         'minheight': 600
     },
@@ -129,7 +161,7 @@ center_dict = {
         'minheight': 350
     },
     'Bay': {
-        'center': '{lat:43.7b, lng:-83.93}',
+        'center': '{lat:43.7, lng:-83.93}',
         'minwidth': 350,
         'minheight': 550
     },
@@ -479,6 +511,7 @@ center_dict = {
     },
     'Schoolcraft': {
         'center': '{lat:46.13, lng:-86.24}',
+        'zoom' : 9,
         'minwidth': 550,
         'minheight': 800
     },
@@ -511,7 +544,49 @@ center_dict = {
         'center': '{lat:44.28, lng:-85.58}',
         'minwidth': 400,
         'minheight': 400
-    },
+    }}
 }
-cities = ['Bay City','Detroit','Flint','Grand Rapids','Pontiac', 'Ann Arbor', 'Ypsilanti']
-counties = [county for county in center_dict.keys() if county not in cities]
+
+
+name_case_ls = ['Saginaw', 'Kalamazoo', 'Muskegon']
+name_cases = [{'Saginaw' : 'Saginaw (City)'}, {'Kalamazoo' : 'Kalamazoo (City)'}, {'Muskegon' : 'Muskegon (City)'}]
+counties=[]
+cities = []
+
+
+placenames={}
+names={}
+
+for county in center_dict["County"].keys():
+    counties.append(county)
+
+for city in center_dict["City"].keys():
+    if city in name_case_ls:
+        city = city + " (City)"
+        cities.append(city)
+    else:
+        cities.append(city)
+
+
+for eachcounty in counties:
+    if eachcounty[0] not in placenames:
+        placenames[eachcounty[0]]=[eachcounty]
+    else:
+        placenames[eachcounty[0]].append(eachcounty)
+
+
+for eachcity in cities:
+    if eachcity[0] not in placenames:
+        placenames[eachcity[0]] = [eachcity]
+        placenames[eachcity[0]].sort()
+    else:
+        placenames[eachcity[0]].append(eachcity)
+        placenames[eachcity[0]].sort()
+
+
+keyalphabet=sorted(placenames.keys())
+
+for letter in keyalphabet:
+    names[letter]=placenames[letter]
+
+# print(cities)

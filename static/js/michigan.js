@@ -1,4 +1,4 @@
-let width = 250;
+let width = 300;
 let height = width;
 
 //Create SVG element and append map to the SVG
@@ -48,7 +48,7 @@ async function make_map(svgname, src) {
       .attr("id", "tooltips")
       .attr("data-toggle", "tooltip")
       .attr("title", d => d.properties.name)
-      .on("click", d => window.location.href += d.properties.name + "/" + src)
+      .on("click", d => window.location.href = "/dashboard?src=" + src + "&county=" + d.properties.name)
       $(function() {
         $('[data-toggle="tooltip"]').tooltip()
       })
@@ -57,12 +57,12 @@ async function make_map(svgname, src) {
       .data(cities)
       .enter().append('circle')
         .attr('class', 'city')
-        .attr('r', '3')
+        .attr('r', '3.5')
         .attr("data-toggle", "tooltip")
         .attr('cx', d => projection([d.lng,d.lat])[0])
         .attr('cy', d => projection([d.lng,d.lat])[1])
         .attr("title", d => d.name)
-        .on("click", d => window.location.href += d.name + "/" + src)
+        .on("click", d => window.location.href = "/dashboard?src=" + src + "&city=" + d.name)
         $(function() {
           $('[data-toggle="tooltip"]').tooltip()
         })
