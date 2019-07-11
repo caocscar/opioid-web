@@ -578,3 +578,5 @@ keyalphabet=sorted(placenames.keys())
 
 for letter in keyalphabet:
     names[letter]=placenames[letter]
+
+# print(cities)
