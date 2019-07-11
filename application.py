@@ -55,6 +55,8 @@ def generate_report_given_name():
         county_flag = ''
         data = {
             'placename': city,
+            'propername': propername,
+            'cityorcounty': "city",
             'src': source,
             'county_flag': county_flag,
             'titlename': src_dict[source],
@@ -67,6 +69,7 @@ def generate_report_given_name():
         county_flag = 'County'
         data = {
             'placename': county,
+            'cityorcounty': "county",
             'src': source,
             'county_flag': county_flag,
             'titlename': src_dict[source],
@@ -76,7 +79,7 @@ def generate_report_given_name():
 
 
 
-    return render_template("county_src_report.html", data=data)
+    return render_template("county_src_report.html", data=data, T0=T0, T1=T1)
 
 
 # @application.route('/<string:county>/<string:src>/', defaults={'T0':14, 'T1':None}, methods=['GET'])
