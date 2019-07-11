@@ -110,6 +110,11 @@ td, th {
   font-weight: bold;
 }
 
+#locationdisclaimer{
+  font-style: oblique;
+  font-size: 11px;
+}
+
 @media print{
   .alltables{
     page-break-before: always;
