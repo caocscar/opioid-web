@@ -114,6 +114,10 @@ td, th {
   .alltables{
     page-break-before: always;
   }
+  th{
+    background-color: white !important;
+    color: black !important;
+  }
 }
 
 /* selenium save to pdf print settings */
