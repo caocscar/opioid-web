@@ -48,7 +48,6 @@ def get_lastday(T1, latest_date):
         return latest_date.strftime('%Y-%m-%d')
 
 def create_county_files(name, src, cityorcounty, T0, T1=None):
-    print(T0)
     column = 'city' if cityorcounty == "City" else 'county'
     cty = df[(df[column] == name) & (df['src'] == src)]
     # daily file
