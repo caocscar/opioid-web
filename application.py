@@ -10,7 +10,14 @@ def homepage():
     data = {
       'counties': counties,
     }
-    return render_template("index.html", data=data)
+    placenames=[]
+    for each in cities:
+        placenames.append(each)
+    for each in counties:
+        placenames.append(each)
+    placenames.sort()
+
+    return render_template("index.html", data=data, cities=cities, counties=counties, placenames = placenames)
 
 
 @application.route('/dashboard', methods=['GET'])
