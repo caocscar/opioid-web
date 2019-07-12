@@ -109,7 +109,62 @@ center_dict = { "City" :
         'minwidth':150,
         'minheight': 200
     },
-
+    'Warren':{
+        'center':  '{lat:42.49, lng: -83.06}',
+        'county': 'Macomb',
+        'zoom': 12,
+        'minwidth':150,
+        'minheight': 200
+    },
+    'Roseville':{
+        'center':  '{lat:42.51, lng: -82.94}',
+        'county': 'Macomb',
+        'zoom': 13,
+        'minwidth':150,
+        'minheight': 200
+    },
+    'Hazel Park':{
+        'center':  '{lat:42.46, lng:-83.10}',
+        'county': 'Oakland',
+        'zoom': 14,
+        'minwidth':150,
+        'minheight': 200
+    },
+    'Waterford':{
+        'center':  '{lat:42.66, lng:-83.42}',
+        'county': 'Oakland',
+        'zoom': 12,
+        'minwidth':150,
+        'minheight': 200
+    },
+    'Port Huron':{
+        'center':  '{lat:42.98, lng:-82.44}',
+        'county': 'St. Clair',
+        'zoom': 12,
+        'minwidth':150,
+        'minheight': 200
+    },
+    'Dearborn':{
+        'center':  '{lat:42.31, lng:-83.22}',
+        'county': 'Wayne',
+        'zoom': 12,
+        'minwidth':150,
+        'minheight': 200
+    },
+    'Livonia':{
+        'center':  '{lat:42.40, lng:-83.37}',
+        'county': 'Wayne',
+        'zoom': 12,
+        'minwidth':150,
+        'minheight': 200
+    },
+    'Lansing':{
+        'center':  '{lat:42.70, lng:-84.55}',
+        'county': 'Ingham',
+        'zoom': 11,
+        'minwidth':150,
+        'minheight': 200
+    },
     'Saginaw':{
         'center': '{lat: 43.42, lng: -83.95}',
         'county': 'Saginaw',

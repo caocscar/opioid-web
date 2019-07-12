@@ -21,9 +21,12 @@
         <img id="sos_logo" src="{{url_for('static',filename='img/SOS.png')}}" alt="SOS logo">
         <div class="headingobjects clearfix d-block">
           {% if data.cityorcounty == "city" %}
-
             {% if data.src in ['EMS', 'ME'] %}
-              <h1>City of {{data.propername}} {{data.county_flag}}</h1>
+              {% if data.propername == "Waterford" %}
+                <h1> {{data.propername}} Township {{data.county_flag}}</h1>
+              {% else %}
+                <h1>City of {{data.propername}} {{data.county_flag}}</h1>
+              {% endif %}
             {% else %}
               <h1> City of {{data.propername}} {{data.county_flag}} {{data.titlename}}</h1>
             {% endif %}
