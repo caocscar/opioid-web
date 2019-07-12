@@ -160,7 +160,7 @@ center_dict = { "City" :
     },
     'Lansing':{
         'center':  '{lat:42.70, lng:-84.55}',
-        'county': 'Ingham',
+        'county': ['Ingham', 'Clinton', 'Eaton'],
         'zoom': 11,
         'minwidth':150,
         'minheight': 200

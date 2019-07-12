@@ -91,7 +91,11 @@
               Data Source: Health Information Exchange Admit Discharge Transfer (ADT) message
             {% elif data.src == 'ME' %}
               {% if data.cityorcounty == "city" %}
-                Data Source: {{ data.county }} County {{ data.county_flag }} Medical Examiner
+                {% if data.county is not string %}
+                  Data Source: {{ data.county|join(", ") }} County {{ data.county_flag }} Medical Examiner
+                {% else %}
+                  Data Source: {{ data.county }} County {{  data.county_flag }} Medical Examiner
+                {% endif %}
               {% else %}
                 Data Source: {{ data.placename }} {{ data.county_flag }} Medical Examiner
               {% endif %}
