@@ -115,8 +115,28 @@ td, th {
   font-size: 11px;
 }
 
+#datasource_text{
+  margin-bottom: 8px;
+}
+
+#hidta_logo{
+  height: 85px;
+}
+#ipc_logo{
+  height: 25px;
+}
+#sos_logo{
+  height: 80px;
+  position: absolute;
+  right: 0;
+
+}
 @media print{
   .alltables{
+    page-break-before: always;
+    margin-top: 40px;
+  }
+  .table-pagebreak{
     page-break-before: always;
   }
   th{
