@@ -16,35 +16,38 @@
 <body>
   <div class="container-fluid">
     <!-- Heading -->
-    <div id="sos-title" class="row" style="background: url({{ url_for('static',filename='img/SOS.png') }}) top right no-repeat; background-size: 105px 80px;">
+    <div id="sos-title" class="row">
       <div class="col-md-12">
-        {% if data.cityorcounty == "city" %}
+        <img id="sos_logo" src="{{url_for('static',filename='img/SOS.png')}}" alt="SOS logo">
+        <div class="headingobjects clearfix d-block">
+          {% if data.cityorcounty == "city" %}
 
-          {% if data.src in ['EMS', 'ME'] %}
-            <h1>City of {{data.propername}} {{data.county_flag}}</h1>
+            {% if data.src in ['EMS', 'ME'] %}
+              <h1>City of {{data.propername}} {{data.county_flag}}</h1>
+            {% else %}
+              <h1> City of {{data.propername}} {{data.county_flag}} {{data.titlename}}</h1>
+            {% endif %}
+
           {% else %}
-            <h1> City of {{data.propername}} {{data.county_flag}} {{data.titlename}}</h1>
+            {% if data.src in ['EMS', 'ME'] %}
+              <h1>{{ data.placename }} {{ data.county_flag }}</h1>
+            {% else %}
+              <h1>{{ data.placename }} {{ data.county_flag }} {{data.titlename}}</h1>
+            {% endif %}
+
           {% endif %}
 
-        {% else %}
-          {% if data.src in ['EMS', 'ME'] %}
-            <h1>{{ data.placename }} {{ data.county_flag }}</h1>
-          {% else %}
-            <h1>{{ data.placename }} {{ data.county_flag }} {{data.titlename}}</h1>
+          <h3>
+          {% if data.src == 'EMS' %}
+            EMS Naloxone Administration Locations
+          {% elif data.src == 'ED' %}
+            Patients with Opioid Overdose ICD-10 Codes
+          {% elif data.src == 'ME' %}
+            Suspected Fatal Opioid Overdose Locations
           {% endif %}
-
-        {% endif %}
-
-        <h3>
-        {% if data.src == 'EMS' %}
-          EMS Naloxone Administration Locations
-        {% elif data.src == 'ED' %}
-          Patients with Opioid Overdose ICD-10 Codes
-        {% elif data.src == 'ME' %}
-          Suspected Fatal Opioid Overdose Locations
-        {% endif %}
-        </h3>
-        <h3 class='daterange'></h3>
+          </h3>
+          <h3 class='daterange'></h3>
+        </div>
       </div>
     </div>
 
@@ -72,9 +75,11 @@
 
     <!-- Footer -->
     <footer>
-      <div class="row" style="background: url({{ url_for('static',filename='img/HIDTA.png') }}) top right no-repeat; background-size: 75px 80px; height: 82px;">
+      <div class="row">
+        <!-- style="background: url({{ url_for('static',filename='img/HIDTA.png') }}) top right no-repeat; background-size: 75px 80px; height: 82px;" -->
         <div class="col-md-12">
-          <p style="margin-bottom: 8px;">
+          <img id="hidta_logo" class= "float-right pull-right img-fluid" src ="{{url_for('static', filename='img/HIDTA.png')}}" alt="HIDTA logo">
+          <p id="datasource_text">
             {% if data.src == 'EMS' and data.placename == 'Washtenaw' %}
               Data Source: Huron Valley Ambulance
             {% elif data.src == 'EMS' %}
@@ -89,7 +94,7 @@
               {% endif %}
             {% endif %}
           </p>
-          <img height="25" src="{{ url_for('static',filename='img/IPC.png') }}" alternate="Injury Prevention Center Logo">
+          <img id="ipc_logo" src="{{ url_for('static',filename='img/IPC.png') }}" alt="Injury Prevention Center Logo">
         </div>
       </div>
     </footer>
