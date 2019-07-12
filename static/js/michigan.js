@@ -1,4 +1,4 @@
-let width = 300;
+let width = 550;
 let height = width;
 
 //Create SVG element and append map to the SVG
@@ -17,10 +17,15 @@ let ME = d3.select(".mapME")
     .attr("width", width)
     .attr("height", height);
 
+let ONE = d3.select(".onemap")
+    .append("svg")
+    .attr("width", width)
+    .attr("height", height);
+
 // Load topojson data
-async function make_map(svgname, src) {
+async function make_map(svgname) {
   // Append Div for tooltip to SVG
-  let tooltipDiv = d3.select(".map" + src)
+  let tooltipDiv = d3.select(".onemap")
       .append("div")
       .attr("class", "tooltips")
       .attr("data-toggle", "tooltip")
@@ -43,12 +48,12 @@ async function make_map(svgname, src) {
   svgname.selectAll("path")
       .data(MIgeo.features)
     .enter().append("path")
-      .attr('class', src+' county')
+      .attr('class','county')
       .attr("d", path)
       .attr("id", "tooltips")
       .attr("data-toggle", "tooltip")
       .attr("title", d => d.properties.name)
-      .on("click", d => window.location.href = "/dashboard?src=" + src + "&county=" + d.properties.name)
+      .on("click", d => window.location.href = "/dashboard?src=" + globalDataSource + "&county=" + d.properties.name)
       $(function() {
         $('[data-toggle="tooltip"]').tooltip()
       })
@@ -57,12 +62,12 @@ async function make_map(svgname, src) {
       .data(cities)
       .enter().append('circle')
         .attr('class', 'city')
-        .attr('r', '3.5')
+        .attr('r', '4')
         .attr("data-toggle", "tooltip")
         .attr('cx', d => projection([d.lng,d.lat])[0])
         .attr('cy', d => projection([d.lng,d.lat])[1])
         .attr("title", d => d.name)
-        .on("click", d => window.location.href = "/dashboard?src=" + src + "&city=" + d.name)
+        .on("click", d => window.location.href = "/dashboard?src=" + globalDataSource + "&city=" + d.name)
         $(function() {
           $('[data-toggle="tooltip"]').tooltip()
         })
