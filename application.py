@@ -39,7 +39,7 @@ def generate_report_given_name():
         src = source
 
 
-    create_county_files(name, source, T0, T1, cityorcounty)
+    create_county_files(name, source, cityorcounty, T0, T1)
 
 
     source = source.upper()

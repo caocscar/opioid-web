@@ -48,7 +48,7 @@ def get_lastday(T1, latest_date):
         return latest_date.strftime('%Y-%m-%d')
 
 def create_county_files(name, src, cityorcounty, T0, T1=None):
-    column = 'city' if cityorcounty = "City" else 'county'
+    column = 'city' if cityorcounty == "City" else 'county'
     cty = df[(df[column] == name) & (df['src'] == src)]
     # daily file
     latest_date = df.loc[df['src'] == src,'date'].max()
@@ -70,11 +70,17 @@ def create_county_files(name, src, cityorcounty, T0, T1=None):
     create_daily_file(T_start, T_end, daily)
     # date filtering
     cty_date = cty[cty['date'].between(T_start,T_end)]
+    # rate and change table
+    dayswin = (pd.to_datetime(T_end) - pd.to_datetime(T_start)).days + 1
+    evtrte = len(cty_date)/dayswin
+    create_rte_table_file(cty,T_start,dayswin,evtrte)
     # age, race, gender, gps file
     create_age_file(cty_date)
     create_race_file(cty_date)
     create_gender_file(cty_date)
     create_gps_file(cty_date, T0, T_end)
+    create_evt_table_file(cty_date,name,src)
+    create_ctyzip_freq_table(cty_date)
 
 def create_daily_file(T_start, T_end, daily):
     daily_subset = daily[daily['date'].between(T_start,T_end)]
@@ -98,14 +104,14 @@ def create_gender_file(cty_date):
     gender = gender.reset_index()
     gender.to_csv(os.path.join(savedir,'county_src_gender.csv'), index=False, header=headers)
 
-def create_evt_table_file(cty_date,county,src):
+def create_evt_table_file(cty_date,name,src):
     cty_date = cty_date.sort_values(by=['date', 'zipcode'])
     if src == "EMS":
         tmpTab = cty_date[['date','city','zipcode']]
         tmpTab.columns = ['Date','City','Zip Code']
         tmpTab = tmpTab.replace({'City':r'.*\d.*'},{'City':np.NaN},regex=True)
         tmpTab.to_csv(os.path.join(savedir,'county_src_evttab.csv'), index=False)
-    elif src == "ME" and county == "Wayne":
+    elif src == "ME" and name in ["Wayne","Detroit"]:
         tmpTab = cty_date[['date','city','location','suspected_indicator']]
         tmpTab.columns = ['Date','City','Location','Suspected Overdose Indicator']
         tmpTab = tmpTab.replace({'City':r'.*\d.*'},{'City':np.NaN},regex=True)
@@ -127,6 +133,18 @@ def create_rte_table_file(cty,T_start,days,evtrte):
     else:
         rtetab = pd.DataFrame({'Mean Incidents Per Day':[round(evtrte,1)],'Percent Change Since Last Period':[round((evtrte-pp_evtrte)/pp_evtrte*100,1)]})
         rtetab.to_csv(os.path.join(savedir,'county_src_ratechange.csv'), index=False)
+        
+def create_ctyzip_freq_table(cty):
+    cty_counts = cty['city'].value_counts().to_frame(name="# Incidents")
+    cty_counts["City"] = cty_counts.index
+    cty_counts.loc[len(cty_counts)] = [len(cty),"Total"]
+    cty_counts["Percent"] = round(cty_counts["# Incidents"]/len(cty)*100,1)
+    cty_counts[["City","# Incidents","Percent"]].to_csv(os.path.join(savedir,'county_src_ctyfreqtab.csv'), index=False)
+    zip_counts = cty['zipcode'].value_counts().to_frame(name="# Incidents")
+    zip_counts["Zip Code"] = zip_counts.index
+    zip_counts.loc[len(zip_counts)] = [len(cty),"Total"]
+    zip_counts["Percent"] = round(zip_counts["# Incidents"]/len(cty)*100,1)
+    zip_counts[["Zip Code","# Incidents","Percent"]].to_csv(os.path.join(savedir,'county_src_zipfreqtab.csv'), index=False)
 
 def create_gps_file(cty_date, T0, T_end):
     if T0 <= 14:
