@@ -138,6 +138,7 @@ td, th {
   }
   .table-pagebreak{
     page-break-before: always;
+    margin-top: 40px;
   }
   th{
     background-color: white !important;

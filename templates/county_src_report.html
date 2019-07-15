@@ -92,7 +92,7 @@
             {% elif data.src == 'ME' %}
               {% if data.cityorcounty == "city" %}
                 {% if data.county is not string %}
-                  Data Source: {{ data.county|join(", ") }} County {{ data.county_flag }} Medical Examiner
+                  Data Source: Medical Examiner; {{ data.county|join(", ") }} Counties
                 {% else %}
                   Data Source: {{ data.county }} County {{  data.county_flag }} Medical Examiner
                 {% endif %}
@@ -133,6 +133,23 @@
           </div>
         {% endif %}
       {% endif %}
+      {% if data.cityorcounty == "County" %}
+        <div class="table-pagebreak">
+          <h2> Frequency per City</h2>
+          <div class="table-responsive">
+            <table id="CityFreq" class="table table-bordered table-striped table-hover">
+            </table>
+          </div>
+        </div>
+      {% else %}
+        <div class="table-pagebreak">
+          <h2> Frequency per Zip</h2>
+          <div class="table-responsive">
+            <table id="ZipFreq" class="table table-bordered table-striped table-hover">
+            </table>
+          </div>
+        </div>
+      {% endif %}
     </div>
 
   <script>
@@ -151,6 +168,8 @@
     make_donut_chart("{{ url_for('static',filename='data/county_src_race.csv') }}",'Race');
     make_donut_chart("{{ url_for('static',filename='data/county_src_gender.csv') }}",'Gender');
     makeMeanTable("MeanAndChange", "{{ url_for('static',filename='data/county_src_ratechange.csv') }}");
+    makeFreqTable("ZipFreq", "{{ url_for('static',filename='data/county_src_zipfreqtab.csv') }}")
+    makeFreqTable("CityFreq","{{ url_for('static',filename='data/county_src_ctyfreqtab.csv') }}" )
 
   </script>
   <script async defer
