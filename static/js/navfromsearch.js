@@ -5,15 +5,14 @@ var placeName = document.querySelector("#searchthing").value;
 var form = document.querySelector(".formthing");
 
 if(cities.includes(placeName)){
-  console.log("True");
 
-  location.href = "/dashboard" + "?src=" + globalDataSource +"&" + "city="+placeName;
+  location.href = "/dashboard" + "?src=" + globalDataSource +"&" + "city="+placeName + "&T0=" + startTime + "&T1=" + endTime;
 
 }
+else if(counties.includes(placeName)){
+  location.href  = "/dashboard" + "?src="+ globalDataSource + "&" + "county="+placeName + "&T0=" + startTime + "&T1=" + endTime;
+}
 else{
-  console.log("False");
-  location.href  = "/dashboard" + "?src="+ globalDataSource + "&" + "county="+placeName;
-};
-
-console.log(location.href );
+  alert("Invalid Location");
+}
 };

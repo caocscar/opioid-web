@@ -21,7 +21,9 @@ h1, .p {
   fill: #9b9a6d;
 }
 .radios{
-  margin: 20px;
+  margin-left: 20px;
+  margin-right: 20px;
+  margin-top : 10px;
   font-size: 20px;
 }
 
@@ -67,8 +69,8 @@ circle.city {
 }
 
 .formthing input{
-  width: 500px !important;
-  height: 50px !important;
+  width: 450px !important;
+  height: 50px;
 }
 
 .formthing button{
@@ -90,7 +92,7 @@ form .autocomplete-items {
   border-bottom: none;
   border-top: none;
   z-index: 99;
-  width: 500px;
+  width: 450px;
   top: 100%;
 }
 
@@ -108,4 +110,18 @@ form .autocomplete-items {
 
 .bottombuff{
   height: 400px;
+}
+
+#reportrange{
+cursor: pointer;
+padding: 10px;
+background-color: #fff;
+border: 1px solid grey;
+}
+
+.divbuff{
+  padding-bottom: 50px;
+}
+.headingbuff{
+  padding-bottom: 10px;
 }

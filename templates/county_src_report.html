@@ -134,17 +134,22 @@
           </div>
         {% endif %}
       {% endif %}
-      {% if data.cityorcounty == "County" %}
+      {% if data.cityorcounty == "county" %}
         <div class="table-pagebreak">
-          <h2> Frequency per City</h2>
+          <h2>Frequency per City</h2>
           <div class="table-responsive">
             <table id="CityFreq" class="table table-bordered table-striped table-hover">
+            </table>
+          </div>
+          <h2>Frequency per Zip</h2>
+          <div class="table-responsive">
+            <table id="ZipFreq" class="table table-bordered table-striped table-hover">
             </table>
           </div>
         </div>
       {% else %}
         <div class="table-pagebreak">
-          <h2> Frequency per Zip</h2>
+          <h2>Frequency per Zip</h2>
           <div class="table-responsive">
             <table id="ZipFreq" class="table table-bordered table-striped table-hover">
             </table>
