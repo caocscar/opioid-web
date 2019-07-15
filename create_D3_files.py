@@ -137,10 +137,14 @@ def create_rte_table_file(cty,T_start,days,evtrte):
 def create_ctyzip_freq_table(cty):
     cty_counts = cty['city'].value_counts().to_frame(name="# Incidents")
     cty_counts["City"] = cty_counts.index
-    cty_counts[["City","# Incidents"]].to_csv(os.path.join(savedir,'county_src_ctyfreqtab.csv'), index=False)
+    cty_counts.loc[len(cty_counts)] = [len(cty),"Total"]
+    cty_counts["Percent"] = round(cty_counts["# Incidents"]/len(cty)*100,1)
+    cty_counts[["City","# Incidents","Percent"]].to_csv(os.path.join(savedir,'county_src_ctyfreqtab.csv'), index=False)
     zip_counts = cty['zipcode'].value_counts().to_frame(name="# Incidents")
     zip_counts["Zip Code"] = zip_counts.index
-    zip_counts[["Zip Code","# Incidents"]].to_csv(os.path.join(savedir,'county_src_zipfreqtab.csv'), index=False)
+    zip_counts.loc[len(zip_counts)] = [len(cty),"Total"]
+    zip_counts["Percent"] = round(zip_counts["# Incidents"]/len(cty)*100,1)
+    zip_counts[["Zip Code","# Incidents","Percent"]].to_csv(os.path.join(savedir,'county_src_zipfreqtab.csv'), index=False)
 
 def create_gps_file(cty_date, T0, T_end):
     if T0 <= 14:
