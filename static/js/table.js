@@ -35,6 +35,7 @@ async function makeFreqTable(tableName, fileName) {
         .data((d) => d3.values(d))
         .join('td')
         .text((d,i) => i > 0 ? d : d)
+        .attr("style", d => styleTotal(d))
 };
 
 
@@ -83,3 +84,10 @@ function arrowDirection(d){
   }
 };
   // color and arrow based on whether or not number is between, greater or equal than 0.2, or less than or equal to -0.2
+
+
+function styleTotal(d){
+  if (d === "Total"){
+    return 'font-weight: bold';
+  }
+}
