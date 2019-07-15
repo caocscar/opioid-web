@@ -165,6 +165,27 @@ center_dict = { "City" :
         'minwidth':150,
         'minheight': 200
     },
+    'Eastpointe':{
+        'center':  '{lat:42.47, lng:-82.94}',
+        'county': 'Macomb',
+        'zoom': 13,
+        'minwidth':150,
+        'minheight': 200
+    },
+    'Royal Oak':{
+        'center':  '{lat:42.51, lng:-83.15}',
+        'county': 'Oakland',
+        'zoom': 13,
+        'minwidth':150,
+        'minheight': 200
+    },
+    'Lincoln Park':{
+        'center':  '{lat:42.24, lng:-83.18}',
+        'county': 'Wayne',
+        'zoom': 13,
+        'minwidth':150,
+        'minheight': 200
+    },
     'Saginaw':{
         'center': '{lat: 43.42, lng: -83.95}',
         'county': 'Saginaw',
