@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request
 from opioid_dict import src_dict, center_dict, cities, counties, names, name_cases, name_case_ls
-# from create_D3_files import create_county_files
+from create_D3_files import create_county_files
 
 application = Flask(__name__)
 application.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
@@ -39,7 +39,7 @@ def generate_report_given_name():
         src = source
 
 
-    # create_county_files(name, source, T0, T1, cityorcounty)
+    create_county_files(name, source, T0, T1, cityorcounty)
 
 
     source = source.upper()
