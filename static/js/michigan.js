@@ -53,7 +53,16 @@ async function make_map(svgname) {
       .attr("id", "tooltips")
       .attr("data-toggle", "tooltip")
       .attr("title", d => d.properties.name)
-      .on("click", d => window.location.href = "/dashboard?src=" + globalDataSource + "&county=" + d.properties.name + "&T0=" + startTime + "&T1=" + endTime)
+      .on('click', function(d) {
+        //https://jaketrent.com/post/d3-class-operations/
+        var activeClass = "focused";
+        var alreadyIsActive = d3.select(this).classed(activeClass);
+        svgname.selectAll("circle, path")
+          .classed(activeClass, false);
+        d3.select(this).classed(activeClass, !alreadyIsActive);
+        globalCounty = d.properties.name
+        console.log(globalCounty)
+        })
       $(function() {
         $('[data-toggle="tooltip"]').tooltip()
       })
@@ -67,10 +76,20 @@ async function make_map(svgname) {
         .attr('cx', d => projection([d.lng,d.lat])[0])
         .attr('cy', d => projection([d.lng,d.lat])[1])
         .attr("title", d => d.name)
-        .on("click", d => window.location.href = "/dashboard?src=" + globalDataSource + "&city=" + d.name + "&T0=" + startTime + "&T1=" + endTime)
+        .on('click', function(d) {
+          //https://jaketrent.com/post/d3-class-operations/
+          var activeClass = "focused";
+          var alreadyIsActive = d3.select(this).classed(activeClass);
+          svgname.selectAll('circle, path')
+            .classed(activeClass, false);
+          d3.select(this).classed(activeClass, !alreadyIsActive);
+          globalCity = d.name
+          console.log(globalCity)
+          })
         $(function() {
           $('[data-toggle="tooltip"]').tooltip()
         })
+
 
   };
 
@@ -79,3 +98,12 @@ async function make_map(svgname) {
     d.lng = +d.lng;
     return d
 };
+//
+// d3.selectAll(".city .county").on('click', function (){
+//   var activeClass = "focused";
+//     var alreadyIsActive = d3.select(this).classed(activeClass);
+//     svgname.selectAll('.city .county')
+//       .classed(activeClass, false);
+//     d3.select(this).classed(activeClass, !alreadyIsActive);
+//
+// })

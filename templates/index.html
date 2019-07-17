@@ -20,10 +20,18 @@
     cities = {{ cities|tojson|safe }};
     counties = {{ counties|tojson|safe }};
   </script>
-  <h1 class="header">S.O.S. Reports</h1>
+  <h1>S.O.S. Reports</h1>
   <div class="container">
-    <div class= "row content">
-      <div class="col-sm-6 selectionFilters align-self-center">
+    <div class="row content instructionLabels text-center">
+      <div class="col-sm-6">
+        <h6 class="h6buff">1. Set Date Range and Data Source</h6>
+      </div>
+      <div class="col-sm-6">
+        <h6 class="h6buff">2. Set Location using Map or Search</h6>
+      </div>
+    </div>
+    <div class= "row content mainContent">
+      <div class="col-sm-6 selectionFilters align-items-center">
         <div class= "row content">
           <div class="col-sm-12 text-center">
             <h4 class="headingbuff">Date range:</h4>
@@ -64,14 +72,22 @@
             <div class="onemap" id="onemap"></div>
           </div>
         </div>
+
         <div class = "row content">
           <div class="col-sm-12 d-flex justify-content-center">
             <form class = "form-inline formthing" onsubmit="return navPlace()">
               <input class="form-control autocomplete" method="GET" autocomplete="off" id="searchthing" placeholder="City or County Name" aria-label="Search" type="text">
-              <button type="submit"><i class="fa fa-search"></i></button>
+              <button type="submit">Set Place</button>
             </form>
           </div>
         </div>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="row content generateReport">
+      <div class= "col-sm-12 d-flex justify-content-center align-items-center">
+        <button class="submitInfo" onclick="return generateRep()">Generate Report</button>
       </div>
     </div>
   </div>
@@ -83,8 +99,11 @@
 <script src="/static/js/autocomplete.js"></script>
 <script src="/static/js/navfromsearch.js"></script>
 <script src="/static/js/datepick.js"></script>
+<script src="/static/js/generateRep.js"></script>
 <script>
   var globalDataSource="";
+  var globalCity="";
+  var globalCounty="";
   updateGlobal();
   make_map(ONE, "ONE");
 

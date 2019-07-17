@@ -6,11 +6,12 @@ var form = document.querySelector(".formthing");
 
 if(cities.includes(placeName)){
 
-  location.href = "/dashboard" + "?src=" + globalDataSource +"&" + "city="+placeName + "&T0=" + startTime + "&T1=" + endTime;
-
+  globalCity = placeName;
+  // console.log(globalCity);
 }
 else if(counties.includes(placeName)){
-  location.href  = "/dashboard" + "?src="+ globalDataSource + "&" + "county="+placeName + "&T0=" + startTime + "&T1=" + endTime;
+  globalCounty = placeName;
+  // console.log(globalCounty);
 }
 else{
   alert("Invalid Location");
