@@ -50,18 +50,14 @@ async function make_map(svgname) {
     .enter().append("path")
       .attr('class','county')
       .attr("d", path)
-      .attr("id", "tooltips")
+      .attr("id", d=> d.properties.name.replace(/\s+/g,"_").replace(/\./g, '_')+"_county")
       .attr("data-toggle", "tooltip")
       .attr("title", d => d.properties.name)
       .on('click', function(d) {
-        //https://jaketrent.com/post/d3-class-operations/
-        var activeClass = "focused";
-        var alreadyIsActive = d3.select(this).classed(activeClass);
-        svgname.selectAll("circle, path")
-          .classed(activeClass, false);
-        d3.select(this).classed(activeClass, !alreadyIsActive);
-        globalCounty = d.properties.name
-        console.log(globalCounty)
+        let element = this;
+          focus_on_citycounty(element);
+        globalCounty = d.properties.name;
+        document.querySelector("#searchthing").value = d.properties.name;
         })
       $(function() {
         $('[data-toggle="tooltip"]').tooltip()
@@ -71,39 +67,36 @@ async function make_map(svgname) {
       .data(cities)
       .enter().append('circle')
         .attr('class', 'city')
+        .attr("id", d=> d.name.replace(/\s+/g,"_").replace(/\./g, '_')+ "_city")
         .attr('r', '4')
         .attr("data-toggle", "tooltip")
         .attr('cx', d => projection([d.lng,d.lat])[0])
         .attr('cy', d => projection([d.lng,d.lat])[1])
         .attr("title", d => d.name)
         .on('click', function(d) {
-          //https://jaketrent.com/post/d3-class-operations/
-          var activeClass = "focused";
-          var alreadyIsActive = d3.select(this).classed(activeClass);
-          svgname.selectAll('circle, path')
-            .classed(activeClass, false);
-          d3.select(this).classed(activeClass, !alreadyIsActive);
-          globalCity = d.name
-          console.log(globalCity)
+          let element = this
+          focus_on_citycounty(element);
+          globalCity = d.name;
+          document.querySelector("#searchthing").value = d.name;
           })
         $(function() {
           $('[data-toggle="tooltip"]').tooltip()
         })
 
-
+  function focus_on_citycounty(element){
+    //https://jaketrent.com/post/d3-class-operations/
+    const activeClass = "focused";
+    const alreadyIsActive = d3.select(element).classed(activeClass);
+    svgname.selectAll('.city, .county')
+      .classed(activeClass, false);
+    d3.select(element).classed(activeClass, !alreadyIsActive);
   };
 
-  function type(d) {
+};
+
+
+function type(d) {
     d.lat = +d.lat;
     d.lng = +d.lng;
     return d
 };
-//
-// d3.selectAll(".city .county").on('click', function (){
-//   var activeClass = "focused";
-//     var alreadyIsActive = d3.select(this).classed(activeClass);
-//     svgname.selectAll('.city .county')
-//       .classed(activeClass, false);
-//     d3.select(this).classed(activeClass, !alreadyIsActive);
-//
-// })

@@ -70,7 +70,7 @@ circle.city {
 }
 
 .focused{
-  fill: #ffcb05 !important;
+  fill: #EAB801 !important;
 }
 
 .formthing input{
@@ -83,6 +83,7 @@ circle.city {
   height: 50px;
   color: black;
   border-radius: 0;
+  font-size: 12px;
 }
 
 .autocomplete {
