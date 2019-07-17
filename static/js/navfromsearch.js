@@ -5,56 +5,56 @@ function navPlace(){
 
     globalCity = placeName;
     mapUpdateOnSearch(placeName);
+    previous = placeName;
     // console.log(globalCity);
-  }
-  else if(counties.includes(placeName)){
+  } else if (counties.includes(placeName)) {
     globalCounty = placeName;
     mapUpdateOnSearch(placeName);
+    previous = placeName;
     // console.log(globalCounty);
-  }
-  else{
-    alert("Invalid Location");
+  } else {
+    document.querySelector("#searchthing").value = "INVALID NAME";
   }
 };
 
+var previous=""
 
 function mapUpdateOnSearch(nameFromSearch){
   if (cities.includes(nameFromSearch)){
-    let cityName = nameFromSearch.split(" (City)")[0];
-    let selectedPlaceCity= document.querySelector("#" + cityName.replace(/\s+/g,"_").replace(/\./g, '_')+"_city");
+    let cases = ['Kalamazoo (City)', 'Saginaw (City)', 'Muskegon (City)'];
+    if (cases.includes(nameFromSearch)) {
+      let cityName = nameFromSearch.split(" (City)")[0];
+      var selectedPlaceCity= document.querySelector("#" + cityName.replace(/\s+/g,"_").replace(/\./g, '_')+"_city");
+    } else {
+      var selectedPlaceCity = document.querySelector("#" + nameFromSearch.replace(/\s+/g,"_").replace(/\./g, '_'));
+    }
     selectedPlaceCity.classList.add("focused");
-  }
-  if (counties.includes(nameFromSearch)){
-    let selectedPlaceCounty = document.querySelector("#" + nameFromSearch.replace(/\s+/g,"_").replace(/\./g, '_')+"_county");
-    selectedPlaceCounty.classList.add("focused")
-  }
-  cities_proper=[];
-  counties_proper=[];
-  for (i = 0 ; i < cities.length; i++){
-    var eachCity = cities[i];
-    if (eachCity != nameFromSearch){
-      if (eachCity.includes("(City)")){
-        var properCityName= cities[i].split(" (City)")[0];
-        cities_proper.push(properCityName)
-      }
-      else{
-        cities_proper.push(eachCity)
-      }
-    }
-  }
-  for (i = 0 ; i < counties.length; i++){
-    var eachCounty = counties[i];
-    if (eachCounty != nameFromSearch){
-      counties_proper.push(eachCounty)
-    }
-  }
+    if (!(previous === "")){
+      // previous has a name in it
 
-  for (i = 0; i < cities_proper.length; i++){
-    var othercities = document.querySelector("#" + cities_proper[i].replace(/\s+/g,"_").replace(/\./g, '_')+"_city");
-    othercities.classList.remove("focused");
-  }
-  for (i = 0 ; i < counties_proper.length; i++){
-    var othercounties = document.querySelector("#" + counties_proper[i].replace(/\s+/g,"_").replace(/\./g, '_')+"_county");
-    othercounties.classList.remove("focused");
+      // previous is a case
+      if (cases.includes(previous)) {
+        fixedName = previous.split(" (City)")[0];
+
+        document.querySelector("#" + fixedName.replace(/\s+/g,"_").replace(/\./g, '_')+"_city").classList.remove("focused");
+      } else {
+        document.querySelector("#" + previous.replace(/\s+/g,"_").replace(/\./g, '_')).classList.remove("focused");
+      }
+    }
+  };
+  if (counties.includes(nameFromSearch)){
+    let cases = ['Kalamazoo (City)', 'Saginaw (City)', 'Muskegon (City)'];
+
+    let selectedPlaceCounty = document.querySelector("#" + nameFromSearch.replace(/\s+/g,"_").replace(/\./g, '_'));
+    selectedPlaceCounty.classList.add("focused");
+
+    if (!(previous === "")){
+      if (cases.includes(previous)) {
+        fixedName = previous.split(" (City)")[0];
+        document.querySelector("#" + fixedName.replace(/\s+/g,"_").replace(/\./g, '_')+"_city").classList.remove("focused");
+      } else {
+        document.querySelector("#" + previous.replace(/\s+/g,"_").replace(/\./g, '_')).classList.remove("focused");
+      };
+    }
   }
 };

@@ -50,13 +50,14 @@ async function make_map(svgname) {
     .enter().append("path")
       .attr('class','county')
       .attr("d", path)
-      .attr("id", d=> d.properties.name.replace(/\s+/g,"_").replace(/\./g, '_')+"_county")
+      .attr("id", d => d.properties.name.replace(/\s+/g,"_").replace(/\./g, '_'))
       .attr("data-toggle", "tooltip")
       .attr("title", d => d.properties.name)
       .on('click', function(d) {
         let element = this;
-          focus_on_citycounty(element);
+        focus_on_citycounty(element);
         globalCounty = d.properties.name;
+        previous = globalCounty;
         document.querySelector("#searchthing").value = d.properties.name;
         })
       $(function() {
@@ -67,7 +68,15 @@ async function make_map(svgname) {
       .data(cities)
       .enter().append('circle')
         .attr('class', 'city')
-        .attr("id", d=> d.name.replace(/\s+/g,"_").replace(/\./g, '_')+ "_city")
+        .attr("id", d => {
+          array = ['Kalamazoo', 'Saginaw', 'Muskegon']
+          if (array.includes(d.name)) {
+            return d.name.replace(/\s+/g,"_").replace(/\./g, '_')+"_city"
+          }
+          else{
+            return d.name.replace(/\s+/g,"_").replace(/\./g, '_')
+          }
+        })
         .attr('r', '4')
         .attr("data-toggle", "tooltip")
         .attr('cx', d => projection([d.lng,d.lat])[0])
@@ -77,6 +86,7 @@ async function make_map(svgname) {
           let element = this
           focus_on_citycounty(element);
           globalCity = d.name;
+          previous = globalCity;
           document.querySelector("#searchthing").value = d.name;
           })
         $(function() {
