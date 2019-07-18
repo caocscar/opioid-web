@@ -135,7 +135,7 @@ def create_rte_table_file(cty,T_start,days,evtrte):
         rtetab.to_csv(os.path.join(savedir,'county_src_ratechange.csv'), index=False)
         
 def create_ctyzip_freq_table(cty):
-    cty_counts = cty['city'].value_counts().to_frame(name="# Incidents")
+    cty_counts = (cty.replace({'city':r'.*\d.*'},{'city':"Unknown"},regex=True))['city'].value_counts().to_frame(name="# Incidents")
     cty_counts["City"] = cty_counts.index
     cty_counts.loc[len(cty_counts)] = [len(cty),"Total"]
     cty_counts["Percent"] = round(cty_counts["# Incidents"]/len(cty)*100,1)
