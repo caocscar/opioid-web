@@ -1,3 +1,5 @@
+//http://www.daterangepicker.com/
+
 $(function() {
 
     var start = moment().subtract(13, 'days');
@@ -5,17 +7,20 @@ $(function() {
 
     function cb(start, end) {
         $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
+        startTime = formatDate(start);
+        endTime = formatDate(end);
     }
 
     $('#reportrange').daterangepicker({
+
         startDate: start,
         endDate: end,
         ranges: {
            'Last 7 Days': [moment().subtract(6, 'days'), moment()],
            'Last 14 Days': [moment().subtract(13, 'days'), moment()],
-           'Last 30 Days': [moment().subtract(29, 'days'), moment()],
            'This Month': [moment().startOf('month'), moment().endOf('month')],
            'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+
         }
     }, cb);
 
@@ -33,8 +38,5 @@ $(function() {
 
     return [year, month, day].join('');
 }
-
-  startTime = formatDate(start);
-  endTime = formatDate(end) ;
 
 });
