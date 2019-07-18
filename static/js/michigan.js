@@ -96,7 +96,7 @@ async function make_map(svgname) {
   function focus_on_citycounty(element){
     //https://jaketrent.com/post/d3-class-operations/
     const activeClass = "focused";
-    const alreadyIsActive = d3.select(element).classed(activeClass);
+    let alreadyIsActive = d3.select(element).classed(activeClass);
     svgname.selectAll('.city, .county')
       .classed(activeClass, false);
     d3.select(element).classed(activeClass, !alreadyIsActive);
