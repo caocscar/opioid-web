@@ -109,29 +109,7 @@
         <table id="MeanAndChange" class="table table-bordered table-striped table-hover">
         </table>
       </div>
-      {% if data.src == "EMS" %}
-        <h2>EMS Table</h2>
-        <div class="table-responsive">
-          <table id="EMStable" class="table table-bordered table-striped table-hover">
-          </table>
-        </div>
-      {% elif data.src == "ME" %}
-        {% if data.placename in ['Wayne', 'Detroit'] %}
-          <h2> Wayne County ME Table</h2>
-          <div class="table-responsive">
-            <table id="wayneMEtable" class="table table-bordered table-striped table-hover">
-            </table>
-          </div>
-        {% else %}
-          <h2>ME Table</h2>
-          <div class="table-responsive">
-            <table id="MEtable" class="table table-bordered table-striped table-hover">
-            </table>
-          </div>
-        {% endif %}
-      {% endif %}
-      {% if data.cityorcounty == "county" %}
-        <div class="table-pagebreak">
+	{% if data.cityorcounty == "county" %}
           <h2>Frequency per City</h2>
           <div class="table-responsive">
             <table id="CityFreq" class="table table-bordered table-striped table-hover">
@@ -142,15 +120,39 @@
             <table id="ZipFreq" class="table table-bordered table-striped table-hover">
             </table>
           </div>
-        </div>
       {% else %}
-        <div class="table-pagebreak">
           <h2>Frequency per Zip</h2>
           <div class="table-responsive">
             <table id="ZipFreq" class="table table-bordered table-striped table-hover">
             </table>
           </div>
-        </div>
+      {% endif %}
+      {% if data.src == "EMS" %}
+		<div class="table-pagebreak">
+			<h2>EMS Table</h2>
+			<div class="table-responsive">
+			  <table id="EMStable" class="table table-bordered table-striped table-hover">
+			  </table>
+			</div>
+		</div>
+      {% elif data.src == "ME" %}
+        {% if data.placename in ['Wayne', 'Detroit'] %}
+		  <div class="table-pagebreak">
+			<h2> Wayne County ME Table</h2>
+			<div class="table-responsive">
+				<table id="wayneMEtable" class="table table-bordered table-striped table-hover">
+				</table>
+			</div>
+		  </div>
+        {% else %}
+		  <div class="table-pagebreak>
+			<h2>ME Table</h2>
+			<div class="table-responsive">
+				<table id="MEtable" class="table table-bordered table-striped table-hover">
+				</table>
+			</div>
+		  </div>
+        {% endif %}
       {% endif %}
     </div>
 
