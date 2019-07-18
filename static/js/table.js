@@ -18,6 +18,27 @@ async function makeTable(tableName, fileName) {
 };
 
 
+async function makeFreqTable(tableName, fileName) {
+    data = await d3.csv(fileName);
+    table = d3.select("#" + tableName)
+    thead = table.append('thead').append('tr')
+      .selectAll('th')
+      .data(data.columns)
+      .join('th')
+        .text(d => d);
+    tbody = table.append('tbody');
+    rows = tbody.selectAll('tr')
+        .data(data)
+        .join('tr')
+
+    rows.selectAll('td')
+        .data((d) => d3.values(d))
+        .join('td')
+        .text((d,i) => i > 0 ? d : d)
+        .attr("style", d => styleTotal(d))
+};
+
+
 async function makeMeanTable(tableName, fileName) {
     data = await d3.csv(fileName);
     table = d3.select("#MeanAndChange")
@@ -63,3 +84,10 @@ function arrowDirection(d){
   }
 };
   // color and arrow based on whether or not number is between, greater or equal than 0.2, or less than or equal to -0.2
+
+
+function styleTotal(d){
+  if (d === "Total"){
+    return 'font-weight: bold';
+  }
+}

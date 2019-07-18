@@ -1,9 +1,8 @@
 h1, .p {
   padding-top: 40px;
   text-align: center;
-  font-family: 'Aleo', serif;
+  /* font-family: 'Aleo', serif; */
 }
-
 .p a {
   text-decoration: underline;
   color: blue;
@@ -11,18 +10,33 @@ h1, .p {
 
 .col{
   text-align: center;
-  font-family: 'Aleo', serif;
+  /* font-family: 'Aleo', serif; */
 }
 
 .col-md-4{
   padding-top: 20px;
   text-align: center;
 }
+.county{
+  fill: #9b9a6d;
+}
+.radios{
+  margin-left: 20px;
+  margin-right: 20px;
+  margin-top : 10px;
+  font-size: 20px;
+}
+
+.form-check-inline{
+  margin: 20px;
+}
 
 #ED {
   background: #e4e1df; /* OBSERVATORY WHITE */
 }
-
+.onemap{
+  padding-bottom: 20px;
+}
 
 .EMS.county {
   fill: #a79d96; /* ANGELL HALL ASH */
@@ -49,7 +63,106 @@ path.county:hover, circle.city:hover {
   cursor: pointer;
 }
 
+
 circle.city {
   fill: #587abc;
   stroke: white;
+}
+
+.focused{
+  fill: #EAB801 !important;
+}
+
+.formthing input{
+  width: 450px !important;
+  height: 50px;
+}
+
+.formthing button{
+  width: 80px;
+  height: 50px;
+  color: black;
+  border-radius: 0;
+  font-size: 12px;
+}
+
+.autocomplete {
+  position: relative;
+  display: inline-block;
+}
+
+
+form .autocomplete-items {
+  position: absolute;
+  border: 1px solid #d4d4d4;
+  border-bottom: none;
+  border-top: none;
+  z-index: 99;
+  width: 450px;
+  top: 100%;
+}
+
+.autocomplete-items div {
+  padding: 10px;
+  cursor: pointer;
+  background-color: #fff;
+  border-bottom: 1px solid #d4d4d4;
+}
+
+/*when hovering an item:*/
+.autocomplete-items div:hover {
+  background-color: #e9e9e9;
+}
+
+.bottombuff{
+  height: 400px;
+}
+
+
+#reportrange{
+cursor: pointer;
+padding: 10px;
+background-color: #fff;
+border: 1px solid grey;
+}
+
+.divbuff{
+  padding-bottom: 50px;
+}
+.headingbuff{
+  padding: 10px;
+}
+
+.generateReport{
+  padding: 10px;
+  padding-top: 20px;
+}
+
+.generateReport button{
+  font-weight: bold;
+  padding: 5px;
+  border-radius: 5px;
+
+}
+
+.h6buff{
+  padding-bottom: 20px;
+  font-weight: bold;
+}
+
+.mapAndSearch{
+  border: 5px solid rgb(238,238,238, 0.5);
+  padding: 5px;
+}
+
+.selectionFilters{
+  background:rgb(238,238,238, 0.5);
+}
+
+.instructionLabels{
+  padding-top: 20px;
+}
+
+h1{
+  padding: 5px;
 }
