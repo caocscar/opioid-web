@@ -36,10 +36,9 @@ This should bring you to the home page.
 5. Select **date range**, **data source**, and **county or city** from the map
     - **Date Range:** The default range is **2 weeks (14 days)** counting backwards from your access date
 
+      **Custom Range:** select the start date, then the end date. **Click Apply** to use these dates.
+
     [image of date range](/readmeimg/daterange.png)
-
-
-        - **Custom Range:** select the start date, then the end date. **Click Apply** to use these dates.
 
     - **Data Source:** Toggle amongst 3 data sources: **EMS**, **ME**, and **ED**
 
