@@ -38,6 +38,7 @@ This should bring you to the home page.
 
     [image of date range](/readmeimg/daterange.png)
 
+
         - **Custom Range:** select the start date, then the end date. **Click Apply** to use these dates.
 
     - **Data Source:** Toggle amongst 3 data sources: **EMS**, **ME**, and **ED**
