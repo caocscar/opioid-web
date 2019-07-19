@@ -47,15 +47,13 @@ This should bring you to the home page.
     - **County or City:** There are two options for selecting a county or city — through the map and through the autocomplete search
 
         ![example of hover and click](hoverandclick1.png)
-
         ![example of hover and click](hoverandclick2.png)
 
         + **Hover and Click** on a City or County to select from the map.
 
-        OR
+        **OR**
 
         ![example of type and select](typeandselect1.png)
-
         ![example of type and select](typeandselect2.png)
 
         + **Type and Select** a name to select from the search bar. **Click the “Set Location” button to confirm your selection.** Successful selection changes the county/city’s color on the map (see below for example).
