@@ -45,6 +45,12 @@ gender_dict = {'F':'Female',
                'Unknown (Unable to Determine)':'Unknown',
                'Not Applicable':'Unknown',
                }
+city_dict = {'Kalamazoo':'Kalamazoo and Charter Township of Kalamazoo',
+             'Charter Township Of Kalamazoo':'Kalamazoo and Charter Township of Kalamazoo',
+             'Port Huron':'Port Huron and Charter Township of Port Huron',
+             'Charter Township Of Port Huron':'Port Huron and Charter Township of Port Huron',
+             'Canton':'Charter Township of Canton',
+             }
 center_dict = { "City" :
     {'Ann Arbor': {
         'center': '{lat: 42.28, lng: -83.73}',

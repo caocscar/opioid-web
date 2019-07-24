@@ -9,11 +9,6 @@ pdfs/
 screenshot/
 draft/
 
-# web scraping stuff
-chromedriver.exe
-*fake*
-*screenshot*.py
-
 # Documentation
 *.pdf
 *.docx

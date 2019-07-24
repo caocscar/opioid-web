@@ -7,10 +7,11 @@ Created on Thu Mar  7 14:36:25 2019
 import pandas as pd
 import numpy as np
 import os
-from opioid_dict import race_dict, gender_dict, cities
+from opioid_dict import city_dict
 from datetime import datetime
 
 pd.options.display.max_rows = 30
+pd.options.display.max_columns = 10
 
 wdir = os.path.join('static','data')
 savedir = os.path.join('static','data')
@@ -48,8 +49,8 @@ def get_lastday(T1, latest_date):
         return latest_date.strftime('%Y-%m-%d')
 
 def create_county_files(name, src, cityorcounty, T0, T1=None):
-    column = 'city' if cityorcounty == "City" else 'county'
-    cty = df[(df[column] == name) & (df['src'] == src)]
+    column = 'city' if cityorcounty.lower() == "city" else 'county'
+    cty = df[(df[column].str.contains(name)) & (df['src'] == src)]
     # daily file
     latest_date = df.loc[df['src'] == src,'date'].max()
     T_start = get_firstday(T0, latest_date)
@@ -135,6 +136,8 @@ def create_rte_table_file(cty,T_start,days,evtrte):
         rtetab.to_csv(os.path.join(savedir,'county_src_ratechange.csv'), index=False)
         
 def create_ctyzip_freq_table(cty):
+    cty['city'] = cty['city'].str.title()
+    cty.replace({'city': city_dict}, inplace=True)
     cty_counts = (cty.replace({'city':r'.*\d.*'},{'city':"Unknown"},regex=True))['city'].value_counts().to_frame(name="# Incidents")
     cty_counts["City"] = cty_counts.index
     cty_counts.loc[len(cty_counts)] = [len(cty),"Total"]
@@ -164,4 +167,4 @@ def create_gps_file(cty_date, T0, T_end):
 
 #%%
 if __name__ == '__main__':
-    create_county_files('Wayne','EMS', 20190224, 20190308)
+    create_county_files('Wayne','EMS', 'county', 20190101)
