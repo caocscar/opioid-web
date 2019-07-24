@@ -22,7 +22,7 @@ genderlist = ['Female','Male','Unknown']
 
 headers = ['index','value']
 
-files = ['web_ED.csv','web_EMS.csv','web_EMS_Washtenaw.csv','web_ME.csv','web_ME_Wayne.csv']
+files = ['web_EMS.csv','web_EMS_Washtenaw.csv','web_ME.csv','web_ME_Wayne.csv']
 list_df = []
 for file in files:
     tmp = pd.read_csv(os.path.join(wdir,file))
