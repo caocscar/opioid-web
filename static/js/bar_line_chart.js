@@ -30,21 +30,21 @@ async function make_bar_line_chart(filename) {
   ymax = d3.extent(data, d => d3.max([d.bar,d.line,4]))[1]
   var yBar = d3.scaleLinear()
                 .domain([0, ymax+0.2] )
-                .range([height, 0]).nice();        
+                .range([height, 0]).nice();
   var yAxis = d3.axisLeft(yBar)
                 .tickValues(d3.range(ymax+1))
                 .tickFormat(d3.format("d"));
 
   // add the y-axis gridlines
   numticks = ymax > 10 ? ymax/2 : ymax
-  svg.append("g")			
+  svg.append("g")
       .attr("class", "grid")
       .call(d3.axisLeft(yBar)
               .ticks(numticks)
               .tickSize(-width)
-              .tickFormat("") 
+              .tickFormat("")
       )
-      
+
   // define the line
   var valueline = d3.line()
       .x(d => xLine(d.x))
@@ -52,14 +52,14 @@ async function make_bar_line_chart(filename) {
 
   var rect = svg.selectAll("rect")
       .data(data)
-  		
+
   rect.enter().append("rect")
   	.merge(rect)
       .attr("class", "bar")
       .attr("x", d => xBar(d.x))
       .attr("width", d => xBar.bandwidth())
       .attr("y", d => yBar(d.bar))
-      .attr("height", d => height - yBar(d.bar))  
+      .attr("height", d => height - yBar(d.bar))
 
   // Add the valueline path.
   svg.append("path")
@@ -94,7 +94,7 @@ async function make_bar_line_chart(filename) {
   var L = svg.selectAll('.cao')
       .data(['Daily','7 Day Moving Average'])
     .enter().append('g')
-      .attr('class','legend')        
+      .attr('class','legend')
       .attr("transform", (d,i) => i===0 ? "translate(400,"+(height+70)+")" : "translate(550,"+(height+70)+")")
 
   L.append('rect')
@@ -102,13 +102,13 @@ async function make_bar_line_chart(filename) {
       .attr('y', (d,i) => i===0 ? 0 : 6)
       .attr("width", (d,i) => i===0 ? 20 : 30)
       .attr("height", (d,i) => i===0 ? 20 : 4)
-      .style("fill", (d,i) => i===0 ? '#FFCB05' : '#00274C' )      
-  
+      .style("fill", (d,i) => i===0 ? '#FFCB05' : '#00274C' )
+
   L.append('text')
       .attr('x' ,40)
       .attr('y', 15)
       .text(d => d)
-  
+
   // Date Range
   // parse the date / time
   var parseTime = d3.timeParse("%Y-%m-%d")

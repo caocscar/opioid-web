@@ -18,9 +18,9 @@ $(function() {
         ranges: {
            'Last 7 Days': [moment().subtract(6, 'days'), moment()],
            'Last 14 Days': [moment().subtract(13, 'days'), moment()],
-           'This Month': [moment().startOf('month'), moment().endOf('month')],
-           'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
-
+           'Last Month': [moment().subtract(1, 'month').add(1, 'days'), moment()],
+           'Last 3 Months': [moment().subtract(3, 'month').add(1, 'days'), moment()],
+           'Year-to-Date' : [moment().startOf('year'), moment()]
         }
     }, cb);
 
