@@ -7,7 +7,7 @@ Created on Thu Mar  7 14:36:25 2019
 import pandas as pd
 import numpy as np
 import os
-from opioid_dict import city_dict
+from opioid_dict import aggregation_dict, name_correction_dict
 from datetime import datetime
 
 pd.options.display.max_rows = 30
@@ -32,6 +32,7 @@ for file in files:
     tmp['src'] = dataset.strip('.csv')
     list_df.append(tmp)
 df = pd.concat(list_df,ignore_index=True,sort=True)
+df.replace({'city': name_correction_dict}, inplace=True)
 
 #%%
 def get_firstday(T0, latest_date):
@@ -110,18 +111,15 @@ def create_evt_table_file(cty_date,name,src):
     if src == "EMS":
         tmpTab = cty_date[['date','city','zipcode']]
         tmpTab.columns = ['Date','City','Zip Code']
-        tmpTab = tmpTab.replace({'City':r'.*\d.*'},{'City':np.NaN},regex=True)
-        tmpTab.to_csv(os.path.join(savedir,'county_src_evttab.csv'), index=False)
     elif src == "ME" and name in ["Wayne","Detroit"]:
         tmpTab = cty_date[['date','city','location','suspected_indicator']]
         tmpTab.columns = ['Date','City','Location','Suspected Overdose Indicator']
-        tmpTab = tmpTab.replace({'City':r'.*\d.*'},{'City':np.NaN},regex=True)
-        tmpTab.to_csv(os.path.join(savedir,'county_src_evttab.csv'), index=False)
     elif src == "ME":
         tmpTab = cty_date[['date','city','location']]
         tmpTab.columns = ['Date','City','Location']
-        tmpTab = tmpTab.replace({'City':r'.*\d.*'},{'City':np.NaN},regex=True)
-        tmpTab.to_csv(os.path.join(savedir,'county_src_evttab.csv'), index=False)
+    tmpTab = tmpTab.replace({'City':r'.*\d.*'},{'City':np.NaN}, regex=True)
+    tmpTab.to_csv(os.path.join(savedir,'county_src_evttab.csv'), index=False)
+
 
 def create_rte_table_file(cty,T_start,days,evtrte):
     pp_end = pd.to_datetime(T_start) + pd.DateOffset(days=-1)
@@ -137,7 +135,7 @@ def create_rte_table_file(cty,T_start,days,evtrte):
         
 def create_ctyzip_freq_table(cty):
     cty['city'] = cty['city'].str.title()
-    cty.replace({'city': city_dict}, inplace=True)
+    cty.replace({'city': aggregation_dict}, inplace=True)
     cty_counts = (cty.replace({'city':r'.*\d.*'},{'city':"Unknown"},regex=True))['city'].value_counts().to_frame(name="# Incidents")
     cty_counts["City"] = cty_counts.index
     cty_counts.loc[len(cty_counts)] = [len(cty),"Total"]
