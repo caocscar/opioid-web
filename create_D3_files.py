@@ -128,10 +128,9 @@ def create_rte_table_file(cty,T_start,days,evtrte):
     pp_evtrte = len(cty_pp)/days
     if pp_start < pd.to_datetime("20190101") or pp_evtrte == 0:
         rtetab = pd.DataFrame({'Mean Incidents Per Day':[round(evtrte,1)],'Percent Change Since Last Period':[np.NaN]})
-        rtetab.to_csv(os.path.join(savedir,'county_src_ratechange.csv'), index=False)
     else:
         rtetab = pd.DataFrame({'Mean Incidents Per Day':[round(evtrte,1)],'Percent Change Since Last Period':[round((evtrte-pp_evtrte)/pp_evtrte*100,1)]})
-        rtetab.to_csv(os.path.join(savedir,'county_src_ratechange.csv'), index=False)
+    rtetab.to_csv(os.path.join(savedir,'county_src_ratechange.csv'), index=False)
         
 def create_ctyzip_freq_table(cty):
     cty['city'] = cty['city'].str.title()
