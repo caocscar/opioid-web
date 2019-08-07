@@ -16,7 +16,7 @@ pd.options.display.max_columns = 10
 wdir = os.path.join('static','data')
 savedir = os.path.join('static','data')
 
-racelist = ['White','Black','Hispanic or Latino','Asian','American Indian or Alask Native',
+racelist = ['White','Black','Hispanic or Latino','Asian','American Indian or Alaska Native',
          'Native Hawaiian or Other Pacific Islander','Other','Unknown',
          ]
 genderlist = ['Female','Male','Unknown']
@@ -119,7 +119,6 @@ def create_evt_table_file(cty_date,name,src):
         tmpTab.columns = ['Date','City','Location']
     tmpTab = tmpTab.replace({'City':r'.*\d.*'},{'City':np.NaN}, regex=True)
     tmpTab.to_csv(os.path.join(savedir,'county_src_evttab.csv'), index=False)
-
 
 def create_rte_table_file(cty,T_start,days,evtrte):
     pp_end = pd.to_datetime(T_start) + pd.DateOffset(days=-1)
